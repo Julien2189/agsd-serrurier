@@ -1,0 +1,3576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Apprendre Python | Cours complet en français</title>
+  <meta name="description" content="Cours Python complet en français : bases, fonctions, POO, fichiers, erreurs, async, tests, API, SQLite, packaging et exercices." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#07070f" />
+  <meta name="author" content="JLQDeveloppement" />
+
+  <style>
+    :root {
+      --blue: #3b82f6;
+      --cyan: #06b6d4;
+      --yellow: #facc15;
+      --green: #22c55e;
+      --pink: #d946ef;
+      --bg: #07070f;
+      --surface: rgba(15, 15, 30, 0.82);
+      --surface-2: rgba(20, 20, 42, 0.92);
+      --code: rgba(0, 0, 0, 0.42);
+      --text: #ecf0ff;
+      --muted: #9ca3c7;
+      --muted-2: #6b728e;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-2: rgba(255, 255, 255, 0.14);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      --sidebar: 292px;
+    }
+
+    body.light {
+      --bg: #f4f7fb;
+      --surface: rgba(255, 255, 255, 0.86);
+      --surface-2: rgba(255, 255, 255, 0.96);
+      --code: rgba(15, 23, 42, 0.06);
+      --text: #111827;
+      --muted: #475569;
+      --muted-2: #64748b;
+      --border: rgba(15, 23, 42, 0.10);
+      --border-2: rgba(15, 23, 42, 0.16);
+      --shadow: 0 22px 60px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 86px;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.15), transparent 28rem),
+        radial-gradient(circle at 90% 20%, rgba(250, 204, 21, 0.10), transparent 26rem),
+        radial-gradient(circle at 50% 90%, rgba(217, 70, 239, 0.10), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 58px;
+      padding: 8px 18px;
+      background: rgba(7, 7, 15, 0.78);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    body.light .topbar {
+      background: rgba(244, 247, 251, 0.82);
+    }
+
+    .hamburger,
+    .theme-btn,
+    .top-link {
+      border: 1px solid var(--border-2);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .hamburger {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 18px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text);
+      transition: 0.25s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .theme-btn:hover,
+    .top-link:hover,
+    .hamburger:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: max-content;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-right: auto;
+    }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--yellow));
+      color: #080814;
+      font-weight: 900;
+    }
+
+    .layout {
+      display: flex;
+      padding-top: 58px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 58px;
+      left: 0;
+      width: var(--sidebar);
+      height: calc(100vh - 58px);
+      overflow-y: auto;
+      padding: 26px 18px 40px;
+      background: rgba(7, 7, 15, 0.56);
+      border-right: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      z-index: 700;
+    }
+
+    body.light .sidebar {
+      background: rgba(255, 255, 255, 0.70);
+    }
+
+    .sidebar-title {
+      font-size: 1.45rem;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, var(--blue), var(--cyan), var(--yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .sidebar-subtitle {
+      margin: 8px 0 18px;
+      font-size: 0.75rem;
+      color: var(--muted-2);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border: 1px solid var(--border-2);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: var(--surface);
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .nav {
+      display: grid;
+      gap: 4px;
+    }
+
+    .nav a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      transition: 0.18s ease;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--text);
+    }
+
+    .nav a.active {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .nav-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--yellow));
+      flex: 0 0 auto;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 58px 0 0 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 650;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.2s ease;
+    }
+
+    .overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1200px;
+      margin-left: var(--sidebar);
+      padding: 42px 42px 90px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 6vw, 62px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 25% 50%, rgba(59, 130, 246, 0.22), transparent 28%),
+        radial-gradient(circle at 75% 45%, rgba(250, 204, 21, 0.15), transparent 30%);
+      z-index: -1;
+    }
+
+    .kicker {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+      padding: 6px 10px;
+      border: 1px solid var(--border-2);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    h1 {
+      max-width: 850px;
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+      margin-bottom: 18px;
+    }
+
+    .gradient {
+      background: linear-gradient(135deg, var(--blue), var(--cyan), var(--yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1.06rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    body.light .stat {
+      background: rgba(15, 23, 42, 0.035);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--yellow);
+    }
+
+    .stat span {
+      color: var(--muted-2);
+      font-size: 0.83rem;
+    }
+
+    .section {
+      padding-top: 42px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-title span {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.13);
+      color: var(--blue);
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 760px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface);
+      overflow: hidden;
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-2);
+      background: var(--surface-2);
+    }
+
+    .card-head {
+      width: 100%;
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr) minmax(120px, 240px) max-content;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
+    }
+
+    .card-tag {
+      padding: 4px 9px;
+      border-radius: 8px;
+      background: rgba(59, 130, 246, 0.13);
+      color: var(--cyan);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.72rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .card-title {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 800;
+    }
+
+    .card-brief {
+      color: var(--muted-2);
+      font-size: 0.86rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chevron {
+      color: var(--muted-2);
+      transition: 0.2s ease;
+    }
+
+    .card.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .card-body {
+      display: none;
+      padding: 0 16px 16px;
+    }
+
+    .card.open .card-body {
+      display: block;
+    }
+
+    .card-body p {
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+
+    pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--code);
+    }
+
+    code,
+    pre,
+    textarea {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .interpreter {
+      margin-top: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .terminal-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.20);
+    }
+
+    body.light .terminal-head {
+      background: rgba(15, 23, 42, 0.05);
+    }
+
+    .terminal-head span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .terminal-head span:nth-child(1) { background: #ff5f57; }
+    .terminal-head span:nth-child(2) { background: #febc2e; }
+    .terminal-head span:nth-child(3) { background: #28c840; }
+
+    .terminal-head strong {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-right: auto;
+    }
+
+    .terminal-head button {
+      border: 1px solid var(--border-2);
+      background: var(--surface);
+      color: var(--text);
+      padding: 7px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .terminal-head button:hover:not(:disabled) {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 230px;
+      border: 0;
+      outline: none;
+      resize: vertical;
+      padding: 16px;
+      background: var(--code);
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .output-title {
+      padding: 10px 16px 0;
+      color: var(--muted-2);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-weight: 900;
+    }
+
+    .output {
+      min-height: 80px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--green);
+      white-space: pre-wrap;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 28px 0 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted-2);
+      text-align: center;
+    }
+
+    @media (max-width: 1100px) {
+      .hamburger {
+        display: inline-flex;
+      }
+
+      .top-link {
+        display: none;
+      }
+
+      .sidebar {
+        transform: translateX(-105%);
+        transition: 0.28s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 30px 0 90px rgba(0, 0, 0, 0.45);
+      }
+
+      .overlay {
+        display: block;
+      }
+
+      main {
+        margin-left: 0;
+        max-width: none;
+      }
+
+      body.sidebar-open {
+        overflow: hidden;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar {
+        padding: 8px 10px;
+      }
+
+      .brand span:last-child {
+        display: none;
+      }
+
+      main {
+        padding: 24px 12px 70px;
+      }
+
+      .hero {
+        border-radius: 20px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card-head {
+        grid-template-columns: max-content minmax(0, 1fr) max-content;
+      }
+
+      .card-brief {
+        display: none;
+      }
+
+      .sidebar {
+        width: min(86vw, 320px);
+      }
+
+      code,
+      pre,
+      textarea {
+        font-size: 0.78rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <button class="hamburger" id="menuBtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sidebar">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="brand">
+      <span class="brand-badge">Py</span>
+      <span>Apprendre Python</span>
+    </div>
+
+    <a href="#installation" class="top-link">Départ</a>
+    <a href="#bases" class="top-link">Bases</a>
+    <a href="#poo" class="top-link">POO</a>
+    <a href="#api" class="top-link">API</a>
+    <a href="#exercices" class="top-link">Exercices</a>
+
+    <button class="theme-btn" id="themeBtn" type="button">Mode clair</button>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-title">Python</div>
+      <div class="sidebar-subtitle">Cours corrigé complet</div>
+      <a href="index.html" class="back-link">← Retour</a>
+      <nav class="nav">
+        <a href="#installation"><span class="nav-dot"></span>Installation &amp; environnement</a>
+<a href="#bases"><span class="nav-dot"></span>Variables &amp; types</a>
+<a href="#strings"><span class="nav-dot"></span>Strings</a>
+<a href="#operateurs"><span class="nav-dot"></span>Opérateurs</a>
+<a href="#listes"><span class="nav-dot"></span>Listes</a>
+<a href="#structures"><span class="nav-dot"></span>Tuples, sets &amp; dictionnaires</a>
+<a href="#comprehensions"><span class="nav-dot"></span>Compréhensions</a>
+<a href="#controle"><span class="nav-dot"></span>Conditions &amp; boucles</a>
+<a href="#fonctions"><span class="nav-dot"></span>Fonctions</a>
+<a href="#decorateurs"><span class="nav-dot"></span>Décorateurs</a>
+<a href="#poo"><span class="nav-dot"></span>POO : classes &amp; objets</a>
+<a href="#heritage"><span class="nav-dot"></span>Héritage</a>
+<a href="#modules"><span class="nav-dot"></span>Modules &amp; imports</a>
+<a href="#fichiers-erreurs"><span class="nav-dot"></span>Fichiers &amp; erreurs</a>
+<a href="#generateurs"><span class="nav-dot"></span>Générateurs &amp; itérateurs</a>
+<a href="#type-hints"><span class="nav-dot"></span>Type hints</a>
+<a href="#async"><span class="nav-dot"></span>Async / await</a>
+<a href="#regex"><span class="nav-dot"></span>Regex</a>
+<a href="#datetime"><span class="nav-dot"></span>Date, bytes &amp; encodage</a>
+<a href="#functools"><span class="nav-dot"></span>Functools &amp; contextlib</a>
+<a href="#threading"><span class="nav-dot"></span>Threading &amp; multiprocessing</a>
+<a href="#tests"><span class="nav-dot"></span>Tests avec pytest</a>
+<a href="#api"><span class="nav-dot"></span>HTTP, JSON, CSV &amp; SQLite</a>
+<a href="#cli-logging"><span class="nav-dot"></span>CLI, logging &amp; système</a>
+<a href="#debug-packaging"><span class="nav-dot"></span>Debugging, packaging &amp; qualité</a>
+<a href="#exercices"><span class="nav-dot"></span>Exercices progressifs</a>
+        <a href="#interpreter"><span class="nav-dot"></span>Interpréteur Python</a>
+      </nav>
+    </aside>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="kicker">🐍 Version HTML corrigée • exemples copiables • mobile ready</div>
+        <h1>Apprendre <span class="gradient">Python</span> de zéro à intermédiaire avancé</h1>
+        <p>
+          Ce fichier remplace la version précédente avec des exemples Python corrigés :
+          guillemets valides, indentation propre, méthodes magiques en double underscore,
+          dark mode, menu burger et interpréteur Python intégré.
+        </p>
+
+        <div class="stats">
+          <div class="stat"><strong>26</strong><span>sections</span></div>
+          <div class="stat"><strong>98</strong><span>cartes de cours</span></div>
+          <div class="stat"><strong>100%</strong><span>HTML autonome</span></div>
+          <div class="stat"><strong>Pyodide</strong><span>interpréteur</span></div>
+        </div>
+      </section>
+
+      
+      <section class="section" id="installation">
+        <div class="section-title">
+          <h2>Installation &amp; environnement</h2>
+          <span>DÉPART</span>
+        </div>
+        <p class="section-desc">Installer Python, utiliser le terminal, créer un environnement virtuel et organiser un projet.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">python</span>
+            <span class="card-title">Vérifier Python</span>
+            <span class="card-brief">Version, pip et terminal</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Avant de coder, vérifie que Python est installé et accessible depuis le terminal.</p>
+            <pre><code># Terminal
+python --version
+py --version
+pip --version
+
+# Lancer un fichier
+python main.py
+
+# Lancer une commande rapide
+python -c &quot;print(&#x27;Bonjour Python&#x27;)&quot; </code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">venv</span>
+            <span class="card-title">Créer un environnement virtuel</span>
+            <span class="card-brief">Isoler les dépendances</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un environnement virtuel évite les conflits entre projets.</p>
+            <pre><code># Créer le venv
+python -m venv .venv
+
+# Activer sur Windows
+.venv\Scripts\activate
+
+# Activer sur Linux / macOS
+source .venv/bin/activate
+
+# Installer une dépendance
+pip install requests
+
+# Sauvegarder les dépendances
+pip freeze &gt; requirements.txt
+
+# Réinstaller les dépendances
+pip install -r requirements.txt</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">structure</span>
+            <span class="card-title">Structure simple d&#x27;un projet</span>
+            <span class="card-brief">Organisation de base</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Pour progresser, il faut apprendre à organiser son code en fichiers simples.</p>
+            <pre><code>mon_projet/
+├── .venv/
+├── main.py
+├── fonctions.py
+├── data/
+│   └── exemple.json
+├── tests/
+│   └── test_fonctions.py
+└── requirements.txt</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="bases">
+        <div class="section-title">
+          <h2>Variables &amp; types</h2>
+          <span>BASES</span>
+        </div>
+        <p class="section-desc">Les bases indispensables : variables, nombres, booléens, None, print et input.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">variable</span>
+            <span class="card-title">Déclaration de variable</span>
+            <span class="card-brief">Typage dynamique</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>En Python, il n&#x27;y a pas de let, const ou var. On affecte directement une valeur à un nom.</p>
+            <pre><code>nom = &quot;Julien&quot;
+age = 40
+prix = 19.99
+actif = True
+
+x, y, z = 1, 2, 3
+a = b = c = 0
+
+MAX_RETRY = 5  # constante par convention</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">types</span>
+            <span class="card-title">Types principaux</span>
+            <span class="card-brief">int, float, str, bool, None</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Python détecte le type automatiquement, mais tu peux le vérifier avec type() et isinstance().</p>
+            <pre><code>age = 40
+prix = 29.99
+nom = &quot;Julien&quot;
+connecte = True
+resultat = None
+
+print(type(age))        # &lt;class &#x27;int&#x27;&gt;
+print(type(prix))       # &lt;class &#x27;float&#x27;&gt;
+print(type(nom))        # &lt;class &#x27;str&#x27;&gt;
+print(type(connecte))   # &lt;class &#x27;bool&#x27;&gt;
+
+print(isinstance(age, int))</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">None</span>
+            <span class="card-title">None</span>
+            <span class="card-brief">Absence de valeur</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>None représente l&#x27;absence de valeur. On compare avec is ou is not.</p>
+            <pre><code>resultat = None
+
+if resultat is None:
+    print(&quot;Aucun résultat&quot;)
+
+if resultat is not None:
+    print(&quot;Résultat trouvé&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">bool</span>
+            <span class="card-title">Booléens et valeurs falsy</span>
+            <span class="card-brief">True / False</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Certaines valeurs sont considérées comme fausses : 0, chaîne vide, liste vide, dictionnaire vide, None.</p>
+            <pre><code>print(bool(0))          # False
+print(bool(&quot;&quot;))         # False
+print(bool([]))         # False
+print(bool({}))         # False
+print(bool(None))       # False
+
+print(bool(&quot;Python&quot;))   # True
+print(bool([1, 2]))     # True
+
+liste = []
+
+if not liste:
+    print(&quot;La liste est vide&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">print</span>
+            <span class="card-title">print() et input()</span>
+            <span class="card-brief">Afficher et saisir</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>input() retourne toujours une chaîne de caractères. Il faut convertir avec int() ou float() si besoin.</p>
+            <pre><code>nom = input(&quot;Votre nom : &quot;)
+age = int(input(&quot;Votre âge : &quot;))
+
+print(&quot;Bonjour&quot;, nom)
+print(f&quot;Vous avez {age} ans&quot;)
+print(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, sep=&quot;-&quot;)
+print(&quot;Chargement&quot;, end=&quot;...&quot;)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="strings">
+        <div class="section-title">
+          <h2>Strings</h2>
+          <span>TEXTE</span>
+        </div>
+        <p class="section-desc">Créer, formater, découper et transformer des chaînes de caractères.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">str</span>
+            <span class="card-title">Créer une chaîne</span>
+            <span class="card-brief">Texte immuable</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une string est immuable : chaque modification crée une nouvelle chaîne.</p>
+            <pre><code>simple = &#x27;Bonjour&#x27;
+double = &quot;Bonjour&quot;
+multi = &quot;&quot;&quot;Ligne 1
+Ligne 2
+Ligne 3&quot;&quot;&quot;
+
+chemin = r&quot;C:\Users\Julien\Documents&quot;
+
+texte = &quot;Hello&quot; + &quot; &quot; + &quot;Python&quot;
+rire = &quot;ha&quot; * 3
+
+print(texte)
+print(rire)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">f-string</span>
+            <span class="card-title">F-strings</span>
+            <span class="card-brief">Formatage moderne</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Les f-strings sont la méthode la plus lisible pour insérer des variables dans du texte.</p>
+            <pre><code>nom = &quot;Julien&quot;
+age = 40
+prix = 1299.5
+
+print(f&quot;Salut {nom}, tu as {age} ans&quot;)
+print(f&quot;Prix : {prix:.2f} €&quot;)
+print(f&quot;Prix aligné : {prix:&gt;10.2f}&quot;)
+print(f&quot;Debug : {age = }&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">slicing</span>
+            <span class="card-title">Indexation et slicing</span>
+            <span class="card-brief">Extraire du texte</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Le slicing utilise [début:fin:pas]. La fin est exclue.</p>
+            <pre><code>s = &quot;Python&quot;
+
+print(s[0])      # P
+print(s[-1])     # n
+print(s[0:3])    # Pyt
+print(s[:2])     # Py
+print(s[2:])     # thon
+print(s[::-1])   # nohtyP</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">méthodes</span>
+            <span class="card-title">Méthodes utiles</span>
+            <span class="card-brief">upper, lower, split, join</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Les méthodes de string permettent de nettoyer, rechercher et transformer du texte.</p>
+            <pre><code>s = &quot;  Bonjour Python  &quot;
+
+print(s.strip())
+print(s.upper())
+print(s.lower())
+print(s.replace(&quot;Python&quot;, &quot;Julien&quot;))
+
+mots = &quot;html,css,python&quot;.split(&quot;,&quot;)
+print(mots)
+
+texte = &quot; - &quot;.join([&quot;HTML&quot;, &quot;CSS&quot;, &quot;Python&quot;])
+print(texte)
+
+print(&quot;Python&quot;.startswith(&quot;Py&quot;))
+print(&quot;thon&quot; in &quot;Python&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">tests</span>
+            <span class="card-title">Tester une chaîne</span>
+            <span class="card-brief">isdigit, isalpha</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Ces méthodes sont utiles pour vérifier les saisies utilisateur.</p>
+            <pre><code>saisie = input(&quot;Âge : &quot;)
+
+if saisie.isdigit():
+    age = int(saisie)
+    print(f&quot;Âge valide : {age}&quot;)
+else:
+    print(&quot;Nombre invalide&quot;)
+
+print(&quot;abc&quot;.isalpha())
+print(&quot;abc123&quot;.isalnum())
+print(&quot;   &quot;.isspace())</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="operateurs">
+        <div class="section-title">
+          <h2>Opérateurs</h2>
+          <span>BASES</span>
+        </div>
+        <p class="section-desc">Calculs, comparaisons, logique et appartenance.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">+ - * /</span>
+            <span class="card-title">Opérateurs arithmétiques</span>
+            <span class="card-brief">Calculs</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Attention : / retourne toujours un float. Pour une division entière, utilise //.</p>
+            <pre><code>print(10 + 3)
+print(10 - 3)
+print(10 * 3)
+print(10 / 3)
+print(10 // 3)
+print(10 % 3)
+print(2 ** 10)
+
+x = 10
+x += 5
+x *= 2
+print(x)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">comparaison</span>
+            <span class="card-title">Comparaisons</span>
+            <span class="card-brief">==, !=, &lt;, &gt;</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Python permet le chaînage des comparaisons : 1 &lt; x &lt; 10.</p>
+            <pre><code>x = 5
+
+print(x == 5)
+print(x != 3)
+print(1 &lt; x &lt; 10)
+
+a = [1, 2]
+b = [1, 2]
+
+print(a == b)  # même valeur
+print(a is b)  # pas le même objet</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">and/or</span>
+            <span class="card-title">Opérateurs logiques</span>
+            <span class="card-brief">and, or, not</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>and et or utilisent le court-circuit : Python arrête dès que le résultat est connu.</p>
+            <pre><code>age = 25
+actif = True
+
+if age &gt;= 18 and actif:
+    print(&quot;Utilisateur actif majeur&quot;)
+
+nom = &quot;&quot; or &quot;Anonyme&quot;
+print(nom)
+
+connecte = False
+print(not connecte)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">in</span>
+            <span class="card-title">Appartenance</span>
+            <span class="card-brief">in / not in</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>in vérifie si une valeur est présente dans une liste, string, set ou dict.</p>
+            <pre><code>print(3 in [1, 2, 3])
+print(&quot;Py&quot; in &quot;Python&quot;)
+
+user = {&quot;nom&quot;: &quot;Julien&quot;, &quot;age&quot;: 40}
+
+print(&quot;nom&quot; in user)
+print(&quot;Julien&quot; in user.values())
+
+interdits = {&quot;admin&quot;, &quot;root&quot;}
+print(&quot;admin&quot; in interdits)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="listes">
+        <div class="section-title">
+          <h2>Listes</h2>
+          <span>DONNÉES</span>
+        </div>
+        <p class="section-desc">Collections ordonnées et mutables.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">list</span>
+            <span class="card-title">Créer une liste</span>
+            <span class="card-brief">Collection modifiable</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une liste peut contenir plusieurs valeurs, même de types différents.</p>
+            <pre><code>nombres = [1, 2, 3, 4]
+fruits = [&quot;pomme&quot;, &quot;banane&quot;, &quot;kiwi&quot;]
+mixte = [1, &quot;texte&quot;, True, 3.14]
+vide = []
+
+print(fruits[0])
+print(fruits[-1])
+print(len(fruits))</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">append</span>
+            <span class="card-title">Ajouter et supprimer</span>
+            <span class="card-brief">append, remove, pop</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>append ajoute à la fin. pop retire et retourne un élément.</p>
+            <pre><code>fruits = [&quot;pomme&quot;, &quot;banane&quot;]
+
+fruits.append(&quot;kiwi&quot;)
+fruits.insert(1, &quot;orange&quot;)
+fruits.extend([&quot;mangue&quot;, &quot;poire&quot;])
+
+fruits.remove(&quot;banane&quot;)
+dernier = fruits.pop()
+
+print(fruits)
+print(dernier)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">sort</span>
+            <span class="card-title">Trier une liste</span>
+            <span class="card-brief">sort et sorted</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>sort modifie la liste originale. sorted retourne une nouvelle liste.</p>
+            <pre><code>nums = [3, 1, 4, 2]
+
+nums.sort()
+print(nums)
+
+nums.sort(reverse=True)
+print(nums)
+
+mots = [&quot;python&quot;, &quot;js&quot;, &quot;typescript&quot;]
+tries = sorted(mots, key=len)
+
+print(tries)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">slicing</span>
+            <span class="card-title">Slicing de liste</span>
+            <span class="card-brief">Copier et extraire</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Le slicing crée une nouvelle liste.</p>
+            <pre><code>nums = [0, 1, 2, 3, 4, 5]
+
+print(nums[1:4])
+print(nums[:3])
+print(nums[3:])
+print(nums[::2])
+print(nums[::-1])
+
+copie = nums[:]
+copie2 = nums.copy()</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">unpacking</span>
+            <span class="card-title">Unpacking</span>
+            <span class="card-brief">Déballer une liste</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>L&#x27;opérateur * récupère le reste des valeurs.</p>
+            <pre><code>a, b, c = [1, 2, 3]
+
+premier, *reste = [1, 2, 3, 4]
+print(premier)
+print(reste)
+
+premier, *milieu, dernier = [1, 2, 3, 4, 5]
+print(milieu)
+
+x, y = 10, 20
+x, y = y, x</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="structures">
+        <div class="section-title">
+          <h2>Tuples, sets &amp; dictionnaires</h2>
+          <span>DONNÉES</span>
+        </div>
+        <p class="section-desc">Structures indispensables pour organiser les données.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">tuple</span>
+            <span class="card-title">Tuples</span>
+            <span class="card-brief">Séquence immuable</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un tuple ressemble à une liste, mais il ne peut pas être modifié.</p>
+            <pre><code>point = (3, 7)
+rgb = (255, 100, 50)
+singleton = (42,)
+
+x, y = point
+
+print(point[0])
+print(point[-1])
+
+# point[0] = 10  # TypeError</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">set</span>
+            <span class="card-title">Sets</span>
+            <span class="card-brief">Éléments uniques</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un set supprime les doublons et permet des recherches rapides.</p>
+            <pre><code>nombres = {1, 2, 2, 3, 3, 4}
+print(nombres)
+
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+print(a | b)  # union
+print(a &amp; b)  # intersection
+print(a - b)  # différence
+print(a ^ b)  # différence symétrique</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">dict</span>
+            <span class="card-title">Dictionnaires</span>
+            <span class="card-brief">clé : valeur</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un dictionnaire stocke des valeurs associées à des clés.</p>
+            <pre><code>user = {
+    &quot;nom&quot;: &quot;Julien&quot;,
+    &quot;age&quot;: 40,
+    &quot;langages&quot;: [&quot;Python&quot;, &quot;JavaScript&quot;]
+}
+
+print(user[&quot;nom&quot;])
+print(user.get(&quot;email&quot;, &quot;Aucun email&quot;))
+
+user[&quot;email&quot;] = &quot;julien@example.com&quot;
+user.update({&quot;ville&quot;: &quot;Dijon&quot;, &quot;role&quot;: &quot;dev&quot;})
+
+for cle, valeur in user.items():
+    print(f&quot;{cle} = {valeur}&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">Counter</span>
+            <span class="card-title">Collections utiles</span>
+            <span class="card-brief">defaultdict, Counter, deque</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>collections apporte des outils puissants pour compter, grouper et gérer des files.</p>
+            <pre><code>from collections import defaultdict, Counter, deque
+
+groupes = defaultdict(list)
+groupes[&quot;A&quot;].append(&quot;Alice&quot;)
+groupes[&quot;A&quot;].append(&quot;Anna&quot;)
+
+mots = [&quot;python&quot;, &quot;js&quot;, &quot;python&quot;]
+compteur = Counter(mots)
+
+file = deque([1, 2, 3])
+file.appendleft(0)
+file.append(4)
+
+print(groupes)
+print(compteur.most_common(1))
+print(file)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="comprehensions">
+        <div class="section-title">
+          <h2>Compréhensions</h2>
+          <span>DONNÉES</span>
+        </div>
+        <p class="section-desc">Créer des listes, dictionnaires et sets de manière concise.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">[for]</span>
+            <span class="card-title">List comprehension</span>
+            <span class="card-brief">Créer une liste en une ligne</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Très pythonique pour transformer ou filtrer une liste.</p>
+            <pre><code>carres = [x ** 2 for x in range(10)]
+pairs = [x for x in range(20) if x % 2 == 0]
+
+noms = [&quot;alice&quot;, &quot;&quot;, &quot;bob&quot;]
+propres = [nom.capitalize() for nom in noms if nom]
+
+print(carres)
+print(pairs)
+print(propres)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">{k:v}</span>
+            <span class="card-title">Dict et set comprehension</span>
+            <span class="card-brief">Créer dict / set</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>La syntaxe ressemble aux listes, mais utilise des accolades.</p>
+            <pre><code>carres = {x: x ** 2 for x in range(5)}
+uniques = {mot.lower() for mot in [&quot;Python&quot;, &quot;PYTHON&quot;, &quot;Js&quot;]}
+
+print(carres)
+print(uniques)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">generator</span>
+            <span class="card-title">Expression génératrice</span>
+            <span class="card-brief">Lazy evaluation</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une expression génératrice ne stocke pas tout en mémoire.</p>
+            <pre><code>gen = (x ** 2 for x in range(1_000_000))
+
+print(next(gen))
+print(next(gen))
+
+total = sum(x ** 2 for x in range(100))
+print(total)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="controle">
+        <div class="section-title">
+          <h2>Conditions &amp; boucles</h2>
+          <span>CONTRÔLE</span>
+        </div>
+        <p class="section-desc">Contrôler le flux du programme.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">if</span>
+            <span class="card-title">Conditions</span>
+            <span class="card-brief">if / elif / else</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Python utilise l&#x27;indentation pour définir les blocs.</p>
+            <pre><code>age = 20
+
+if age &gt;= 18:
+    print(&quot;Majeur&quot;)
+elif age &gt;= 13:
+    print(&quot;Adolescent&quot;)
+else:
+    print(&quot;Enfant&quot;)
+
+statut = &quot;majeur&quot; if age &gt;= 18 else &quot;mineur&quot;
+print(statut)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">match</span>
+            <span class="card-title">match / case</span>
+            <span class="card-brief">Pattern matching</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Disponible depuis Python 3.10, utile pour remplacer certains if/elif complexes.</p>
+            <pre><code>commande = &quot;help&quot;
+
+match commande:
+    case &quot;quit&quot;:
+        print(&quot;Au revoir&quot;)
+    case &quot;help&quot;:
+        print(&quot;Aide&quot;)
+    case _:
+        print(&quot;Commande inconnue&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">for</span>
+            <span class="card-title">Boucle for</span>
+            <span class="card-brief">Itérer sur une séquence</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>La boucle for parcourt des itérables : listes, strings, dictionnaires, range, fichiers...</p>
+            <pre><code>for fruit in [&quot;pomme&quot;, &quot;banane&quot;, &quot;kiwi&quot;]:
+    print(fruit)
+
+for i in range(5):
+    print(i)
+
+user = {&quot;nom&quot;: &quot;Julien&quot;, &quot;age&quot;: 40}
+
+for cle, valeur in user.items():
+    print(cle, valeur)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">while</span>
+            <span class="card-title">Boucle while</span>
+            <span class="card-brief">Tant que</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>while répète tant qu&#x27;une condition est vraie.</p>
+            <pre><code>compteur = 0
+
+while compteur &lt; 5:
+    print(compteur)
+    compteur += 1
+
+while True:
+    saisie = input(&quot;Commande : &quot;)
+    if saisie == &quot;quit&quot;:
+        break</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">enumerate</span>
+            <span class="card-title">enumerate et zip</span>
+            <span class="card-brief">Index et parallèle</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>enumerate évite for i in range(len(liste)). zip permet d&#x27;itérer sur plusieurs listes.</p>
+            <pre><code>langages = [&quot;Python&quot;, &quot;JavaScript&quot;, &quot;PHP&quot;]
+
+for index, langage in enumerate(langages, start=1):
+    print(index, langage)
+
+noms = [&quot;Alice&quot;, &quot;Bob&quot;]
+ages = [25, 30]
+
+for nom, age in zip(noms, ages):
+    print(f&quot;{nom} a {age} ans&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">break</span>
+            <span class="card-title">break, continue, pass</span>
+            <span class="card-brief">Contrôle de boucle</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>break sort de la boucle, continue passe à l&#x27;itération suivante, pass ne fait rien.</p>
+            <pre><code>for n in range(10):
+    if n == 5:
+        break
+    print(n)
+
+for n in range(10):
+    if n % 2 == 0:
+        continue
+    print(n)
+
+def fonction_a_faire():
+    pass</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="fonctions">
+        <div class="section-title">
+          <h2>Fonctions</h2>
+          <span>FONCTIONS</span>
+        </div>
+        <p class="section-desc">Créer du code réutilisable.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">def</span>
+            <span class="card-title">Définir une fonction</span>
+            <span class="card-brief">def et return</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une fonction permet de regrouper une logique et de la réutiliser.</p>
+            <pre><code>def saluer(nom):
+    return f&quot;Bonjour {nom}&quot;
+
+message = saluer(&quot;Julien&quot;)
+print(message)
+
+def addition(a, b):
+    return a + b
+
+print(addition(2, 3))</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">args</span>
+            <span class="card-title">*args et **kwargs</span>
+            <span class="card-brief">Arguments variables</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>*args récupère plusieurs arguments positionnels. **kwargs récupère plusieurs arguments nommés.</p>
+            <pre><code>def somme(*args):
+    return sum(args)
+
+print(somme(1, 2, 3, 4))
+
+def afficher_config(**kwargs):
+    for cle, valeur in kwargs.items():
+        print(f&quot;{cle} = {valeur}&quot;)
+
+afficher_config(host=&quot;localhost&quot;, port=3000)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">scope</span>
+            <span class="card-title">Portée des variables</span>
+            <span class="card-brief">local, global, nonlocal</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Python cherche les variables selon la règle LEGB : Local, Enclosing, Global, Built-in.</p>
+            <pre><code>compteur = 0
+
+def incrementer():
+    global compteur
+    compteur += 1
+
+incrementer()
+print(compteur)
+
+def creer_compteur():
+    count = 0
+
+    def ajouter():
+        nonlocal count
+        count += 1
+        return count
+
+    return ajouter
+
+c = creer_compteur()
+print(c())
+print(c())</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">lambda</span>
+            <span class="card-title">Lambda</span>
+            <span class="card-brief">Fonction anonyme</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une lambda est utile pour une petite fonction courte, souvent dans sorted, map ou filter.</p>
+            <pre><code>carre = lambda x: x ** 2
+print(carre(5))
+
+users = [
+    {&quot;nom&quot;: &quot;Bob&quot;, &quot;age&quot;: 30},
+    {&quot;nom&quot;: &quot;Alice&quot;, &quot;age&quot;: 25}
+]
+
+tries = sorted(users, key=lambda user: user[&quot;age&quot;])
+print(tries)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">closure</span>
+            <span class="card-title">Closure</span>
+            <span class="card-brief">Fonction qui capture son contexte</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une closure garde accès aux variables de la fonction externe.</p>
+            <pre><code>def multiplier_par(n):
+    def multiplier(x):
+        return x * n
+
+    return multiplier
+
+double = multiplier_par(2)
+triple = multiplier_par(3)
+
+print(double(10))
+print(triple(10))</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="decorateurs">
+        <div class="section-title">
+          <h2>Décorateurs</h2>
+          <span>FONCTIONS</span>
+        </div>
+        <p class="section-desc">Modifier le comportement d&#x27;une fonction avec @.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">@decorator</span>
+            <span class="card-title">Créer un décorateur</span>
+            <span class="card-brief">Wrapper</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un décorateur reçoit une fonction et retourne une fonction modifiée.</p>
+            <pre><code>from functools import wraps
+import time
+
+def timer(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        duree = time.time() - start
+        print(f&quot;{func.__name__} : {duree:.3f}s&quot;)
+        return result
+
+    return wrapper
+
+@timer
+def traitement():
+    time.sleep(1)
+
+traitement()</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">@property</span>
+            <span class="card-title">property</span>
+            <span class="card-brief">Attribut calculé</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>@property permet d&#x27;utiliser une méthode comme un attribut.</p>
+            <pre><code>class Cercle:
+    def __init__(self, rayon):
+        self._rayon = rayon
+
+    @property
+    def rayon(self):
+        return self._rayon
+
+    @rayon.setter
+    def rayon(self, valeur):
+        if valeur &lt; 0:
+            raise ValueError(&quot;Rayon négatif&quot;)
+        self._rayon = valeur
+
+    @property
+    def aire(self):
+        return 3.14159 * self._rayon ** 2
+
+c = Cercle(5)
+print(c.aire)
+c.rayon = 10
+print(c.aire)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="poo">
+        <div class="section-title">
+          <h2>POO : classes &amp; objets</h2>
+          <span>POO</span>
+        </div>
+        <p class="section-desc">Créer ses propres types avec des classes.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">class</span>
+            <span class="card-title">Définir une classe</span>
+            <span class="card-brief">class, __init__, self</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>self représente l&#x27;objet courant, comme this en JavaScript.</p>
+            <pre><code>class User:
+    def __init__(self, nom, email):
+        self.nom = nom
+        self.email = email
+        self.actif = True
+
+    def saluer(self):
+        return f&quot;Salut, je suis {self.nom}&quot;
+
+    def __repr__(self):
+        return f&quot;User(nom={self.nom!r})&quot;
+
+u = User(&quot;Julien&quot;, &quot;julien@example.com&quot;)
+print(u.saluer())
+print(u)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">dunder</span>
+            <span class="card-title">Méthodes spéciales</span>
+            <span class="card-brief">__repr__, __eq__, __add__</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Les méthodes dunder permettent de personnaliser les opérateurs et fonctions intégrées.</p>
+            <pre><code>class Vecteur:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+        return f&quot;Vecteur({self.x}, {self.y})&quot;
+
+    def __add__(self, other):
+        return Vecteur(self.x + other.x, self.y + other.y)
+
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+
+v1 = Vecteur(1, 2)
+v2 = Vecteur(3, 4)
+
+print(v1 + v2)
+print(v1 == v2)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">dataclass</span>
+            <span class="card-title">Dataclasses</span>
+            <span class="card-brief">Classes de données</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une dataclass génère automatiquement __init__, __repr__ et __eq__.</p>
+            <pre><code>from dataclasses import dataclass, field
+
+@dataclass
+class Produit:
+    nom: str
+    prix: float
+    stock: int = 0
+    tags: list[str] = field(default_factory=list)
+
+p = Produit(&quot;Clavier&quot;, 49.99, 10)
+print(p)
+
+@dataclass(frozen=True)
+class Point:
+    x: float
+    y: float
+
+point = Point(3, 4)
+print(point)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">encapsulation</span>
+            <span class="card-title">Encapsulation</span>
+            <span class="card-brief">_privé et __mangling</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>En Python, le privé est surtout une convention. _nom indique un attribut interne.</p>
+            <pre><code>class Compte:
+    def __init__(self, solde):
+        self._solde = solde
+        self.__pin = &quot;1234&quot;
+
+    @property
+    def solde(self):
+        return self._solde
+
+c = Compte(1000)
+print(c.solde)
+print(c._solde)
+
+# print(c.__pin)          # AttributeError
+print(c._Compte__pin)    # possible, mais à éviter</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="heritage">
+        <div class="section-title">
+          <h2>Héritage</h2>
+          <span>POO</span>
+        </div>
+        <p class="section-desc">Réutiliser et spécialiser des classes.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">super</span>
+            <span class="card-title">Héritage simple</span>
+            <span class="card-brief">Parent / enfant</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une classe enfant hérite des méthodes et attributs d&#x27;une classe parent.</p>
+            <pre><code>class Animal:
+    def __init__(self, nom):
+        self.nom = nom
+
+    def parler(self):
+        raise NotImplementedError
+
+class Chien(Animal):
+    def __init__(self, nom, race):
+        super().__init__(nom)
+        self.race = race
+
+    def parler(self):
+        return f&quot;{self.nom} dit Woof !&quot;
+
+rex = Chien(&quot;Rex&quot;, &quot;Berger&quot;)
+print(rex.parler())
+print(isinstance(rex, Animal))</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">ABC</span>
+            <span class="card-title">Classes abstraites</span>
+            <span class="card-brief">Forcer des méthodes</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Une classe abstraite définit un contrat que les classes enfants doivent respecter.</p>
+            <pre><code>from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def aire(self) -&gt; float:
+        pass
+
+class Carre(Shape):
+    def __init__(self, cote):
+        self.cote = cote
+
+    def aire(self):
+        return self.cote ** 2
+
+c = Carre(5)
+print(c.aire())</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">mixin</span>
+            <span class="card-title">Mixin</span>
+            <span class="card-brief">Ajouter une capacité</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un mixin ajoute une fonctionnalité sans représenter forcément une relation parent/enfant forte.</p>
+            <pre><code>import json
+
+class JsonMixin:
+    def to_json(self):
+        return json.dumps(self.__dict__, ensure_ascii=False)
+
+class User(JsonMixin):
+    def __init__(self, nom):
+        self.nom = nom
+
+u = User(&quot;Julien&quot;)
+print(u.to_json())</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">slots</span>
+            <span class="card-title">__slots__</span>
+            <span class="card-brief">Économie mémoire</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>__slots__ limite les attributs possibles et évite le __dict__ d&#x27;instance.</p>
+            <pre><code>class Point:
+    __slots__ = (&quot;x&quot;, &quot;y&quot;)
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+p = Point(3, 4)
+print(p.x)
+
+# p.z = 5       # AttributeError
+# print(p.__dict__)  # AttributeError</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="modules">
+        <div class="section-title">
+          <h2>Modules &amp; imports</h2>
+          <span>MODULES</span>
+        </div>
+        <p class="section-desc">Importer du code et utiliser la bibliothèque standard.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">import</span>
+            <span class="card-title">Imports</span>
+            <span class="card-brief">import, from, as</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Les imports doivent être placés en haut du fichier : standard library, packages tiers, modules locaux.</p>
+            <pre><code>import os
+import json
+from pathlib import Path
+from datetime import datetime, timedelta
+import numpy as np
+
+# À éviter sauf cas précis
+# from os import *</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">main</span>
+            <span class="card-title">__name__ == &#x27;__main__&#x27;</span>
+            <span class="card-brief">Point d&#x27;entrée</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Ce bloc ne s&#x27;exécute que si le fichier est lancé directement.</p>
+            <pre><code>def main():
+    print(&quot;Programme principal&quot;)
+
+def helper():
+    return &quot;utilitaire&quot;
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">stdlib</span>
+            <span class="card-title">Modules standard utiles</span>
+            <span class="card-brief">json, pathlib, random, math</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Python contient beaucoup de modules intégrés sans installation.</p>
+            <pre><code>import json
+import random
+import math
+from pathlib import Path
+
+data = {&quot;nom&quot;: &quot;Julien&quot;, &quot;age&quot;: 40}
+texte = json.dumps(data, ensure_ascii=False)
+
+print(random.randint(1, 100))
+print(math.sqrt(16))
+print(Path(&quot;.&quot;).resolve())</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="fichiers-erreurs">
+        <div class="section-title">
+          <h2>Fichiers &amp; erreurs</h2>
+          <span>MODULES</span>
+        </div>
+        <p class="section-desc">Lire, écrire et gérer les exceptions proprement.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">open</span>
+            <span class="card-title">Lire et écrire des fichiers</span>
+            <span class="card-brief">with open</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Utilise toujours with pour fermer automatiquement le fichier.</p>
+            <pre><code># Écriture
+with open(&quot;demo.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+    f.write(&quot;Bonjour Python\n&quot;)
+
+# Lecture
+with open(&quot;demo.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as f:
+    contenu = f.read()
+
+print(contenu)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">pathlib</span>
+            <span class="card-title">pathlib</span>
+            <span class="card-brief">Chemins modernes</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Path est plus lisible que os.path pour manipuler les fichiers.</p>
+            <pre><code>from pathlib import Path
+
+p = Path(&quot;data&quot;) / &quot;fichier.txt&quot;
+
+print(p.name)
+print(p.stem)
+print(p.suffix)
+print(p.parent)
+
+if p.exists():
+    print(p.read_text(encoding=&quot;utf-8&quot;))</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">try</span>
+            <span class="card-title">try / except</span>
+            <span class="card-brief">Gérer les erreurs</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Attrape les erreurs précises plutôt qu&#x27;un except trop large.</p>
+            <pre><code>try:
+    nombre = int(input(&quot;Nombre : &quot;))
+    resultat = 10 / nombre
+except ValueError:
+    print(&quot;Saisie invalide&quot;)
+except ZeroDivisionError:
+    print(&quot;Division par zéro&quot;)
+else:
+    print(f&quot;Résultat : {resultat}&quot;)
+finally:
+    print(&quot;Fin du programme&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">raise</span>
+            <span class="card-title">Lever une exception</span>
+            <span class="card-brief">raise</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>raise permet de signaler explicitement une erreur.</p>
+            <pre><code>class SoldeInsuffisant(Exception):
+    pass
+
+def retirer(solde, montant):
+    if montant &gt; solde:
+        raise SoldeInsuffisant(&quot;Solde insuffisant&quot;)
+    return solde - montant
+
+try:
+    nouveau_solde = retirer(50, 100)
+except SoldeInsuffisant as e:
+    print(e)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">with</span>
+            <span class="card-title">Context manager</span>
+            <span class="card-brief">__enter__, __exit__</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un context manager garantit le nettoyage d&#x27;une ressource.</p>
+            <pre><code>class Ressource:
+    def __enter__(self):
+        print(&quot;Ouverture&quot;)
+        return self
+
+    def __exit__(self, exc_type, exc_val, tb):
+        print(&quot;Fermeture&quot;)
+        return False
+
+with Ressource() as r:
+    print(&quot;Travail&quot;)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="generateurs">
+        <div class="section-title">
+          <h2>Générateurs &amp; itérateurs</h2>
+          <span>AVANCÉ</span>
+        </div>
+        <p class="section-desc">Produire des valeurs à la demande.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">yield</span>
+            <span class="card-title">Générateur avec yield</span>
+            <span class="card-brief">Lazy evaluation</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>yield produit une valeur puis met la fonction en pause.</p>
+            <pre><code>def compter(maximum):
+    n = 0
+    while n &lt; maximum:
+        yield n
+        n += 1
+
+for valeur in compter(5):
+    print(valeur)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">yield from</span>
+            <span class="card-title">yield from</span>
+            <span class="card-brief">Déléguer</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>yield from permet de déléguer à un autre générateur.</p>
+            <pre><code>def aplatir(elements):
+    for item in elements:
+        if isinstance(item, list):
+            yield from aplatir(item)
+        else:
+            yield item
+
+resultat = list(aplatir([1, [2, [3, 4]], 5]))
+print(resultat)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">itertools</span>
+            <span class="card-title">itertools</span>
+            <span class="card-brief">Outils d&#x27;itération</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>itertools fournit des outils performants pour manipuler des itérables.</p>
+            <pre><code>from itertools import chain, combinations, product, islice, count
+
+print(list(chain([1, 2], [3, 4])))
+print(list(combinations(&quot;ABC&quot;, 2)))
+print(list(product([0, 1], repeat=3)))
+print(list(islice(count(), 5)))</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="type-hints">
+        <div class="section-title">
+          <h2>Type hints</h2>
+          <span>AVANCÉ</span>
+        </div>
+        <p class="section-desc">Annoter le code pour le rendre plus clair.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">typing</span>
+            <span class="card-title">Annotations de base</span>
+            <span class="card-brief">str, int, list</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Les types ne sont pas forcés par Python à l&#x27;exécution, mais ils aident l&#x27;IDE et les outils comme mypy.</p>
+            <pre><code>nom: str = &quot;Julien&quot;
+age: int = 40
+scores: list[int] = [12, 15, 18]
+config: dict[str, int] = {&quot;port&quot;: 3000}
+
+def saluer(nom: str) -&gt; str:
+    return f&quot;Bonjour {nom}&quot;
+
+def process(valeur: int | str) -&gt; str:
+    return str(valeur)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">TypedDict</span>
+            <span class="card-title">TypedDict et Literal</span>
+            <span class="card-brief">Structures typées</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>TypedDict est utile pour représenter des objets JSON.</p>
+            <pre><code>from typing import TypedDict, Literal
+
+class User(TypedDict):
+    nom: str
+    age: int
+    email: str
+
+def set_theme(mode: Literal[&quot;dark&quot;, &quot;light&quot;]) -&gt; None:
+    print(f&quot;Thème : {mode}&quot;)
+
+user: User = {
+    &quot;nom&quot;: &quot;Julien&quot;,
+    &quot;age&quot;: 40,
+    &quot;email&quot;: &quot;julien@example.com&quot;
+}
+
+set_theme(&quot;dark&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">Protocol</span>
+            <span class="card-title">Protocol</span>
+            <span class="card-brief">Duck typing typé</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un Protocol définit un contrat sans forcer l&#x27;héritage.</p>
+            <pre><code>from typing import Protocol
+
+class Drawable(Protocol):
+    def draw(self) -&gt; None:
+        ...
+
+def render(obj: Drawable) -&gt; None:
+    obj.draw()
+
+class Cercle:
+    def draw(self) -&gt; None:
+        print(&quot;Dessine un cercle&quot;)
+
+render(Cercle())</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="async">
+        <div class="section-title">
+          <h2>Async / await</h2>
+          <span>AVANCÉ</span>
+        </div>
+        <p class="section-desc">Concurrence pour les opérations I/O.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">async</span>
+            <span class="card-title">Coroutine</span>
+            <span class="card-brief">async def et await</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>asyncio est utile pour les tâches réseau, fichiers ou attentes, pas pour le CPU intensif.</p>
+            <pre><code>import asyncio
+
+async def fetch_data(url: str) -&gt; str:
+    print(f&quot;Début : {url}&quot;)
+    await asyncio.sleep(1)
+    return f&quot;Données de {url}&quot;
+
+async def main():
+    result = await fetch_data(&quot;https://api.example.com&quot;)
+    print(result)
+
+asyncio.run(main())</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">gather</span>
+            <span class="card-title">Lancer plusieurs tâches</span>
+            <span class="card-brief">asyncio.gather</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>gather lance plusieurs coroutines et attend tous les résultats.</p>
+            <pre><code>import asyncio
+
+async def wait_and_return(n):
+    await asyncio.sleep(1)
+    return n
+
+async def main():
+    resultats = await asyncio.gather(
+        wait_and_return(1),
+        wait_and_return(2),
+        wait_and_return(3),
+    )
+    print(resultats)
+
+asyncio.run(main())</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">TaskGroup</span>
+            <span class="card-title">TaskGroup</span>
+            <span class="card-brief">Python 3.11+</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>TaskGroup est une approche moderne pour gérer plusieurs tâches async.</p>
+            <pre><code>import asyncio
+
+async def job(n):
+    await asyncio.sleep(1)
+    return n * 2
+
+async def main():
+    async with asyncio.TaskGroup() as tg:
+        t1 = tg.create_task(job(10))
+        t2 = tg.create_task(job(20))
+
+    print(t1.result())
+    print(t2.result())
+
+asyncio.run(main())</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="regex">
+        <div class="section-title">
+          <h2>Regex</h2>
+          <span>INTERMÉDIAIRE</span>
+        </div>
+        <p class="section-desc">Rechercher et transformer du texte avec le module re.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">re</span>
+            <span class="card-title">search, match, findall</span>
+            <span class="card-brief">Rechercher</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Utilise toujours des raw strings r&#x27;...&#x27; pour écrire des regex.</p>
+            <pre><code>import re
+
+texte = &quot;Prix : 42 euros&quot;
+
+m = re.search(r&quot;\d+&quot;, texte)
+
+if m:
+    print(m.group())
+
+print(re.findall(r&quot;\d+&quot;, &quot;3 pommes et 5 poires&quot;))
+print(re.match(r&quot;\d+&quot;, &quot;42 ans&quot;))
+print(re.fullmatch(r&quot;\d{5}&quot;, &quot;75001&quot;))</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">syntaxe</span>
+            <span class="card-title">Syntaxe regex</span>
+            <span class="card-brief">\d, \w, +, *, ?</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Les regex sont puissantes mais peuvent devenir difficiles à lire. Préfère des patterns simples.</p>
+            <pre><code># \d       chiffre
+# \w       lettre, chiffre ou underscore
+# \s       espace
+# .        n&#x27;importe quel caractère sauf retour ligne
+# +        une ou plusieurs fois
+# *        zéro ou plusieurs fois
+# ?        zéro ou une fois
+# {n}      exactement n fois
+# ^        début
+# $        fin
+
+email = r&quot;^[\w.+-]+@[\w-]+\.[\w.-]+$&quot;
+tel_fr = r&quot;^0[67]\d{8}$&quot; </code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">groupes</span>
+            <span class="card-title">Groupes nommés</span>
+            <span class="card-brief">Capturer des morceaux</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Les groupes nommés rendent les regex plus lisibles.</p>
+            <pre><code>import re
+
+texte = &quot;Date : 22/03/2026&quot;
+pattern = r&quot;(?P&lt;jour&gt;\d{2})/(?P&lt;mois&gt;\d{2})/(?P&lt;annee&gt;\d{4})&quot;
+
+m = re.search(pattern, texte)
+
+if m:
+    print(m.group(&quot;jour&quot;))
+    print(m.group(&quot;mois&quot;))
+    print(m.group(&quot;annee&quot;))
+    print(m.groupdict())</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="datetime">
+        <div class="section-title">
+          <h2>Date, bytes &amp; encodage</h2>
+          <span>INTERMÉDIAIRE</span>
+        </div>
+        <p class="section-desc">Dates, heures, texte Unicode et données binaires.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">datetime</span>
+            <span class="card-title">Date et heure</span>
+            <span class="card-brief">datetime</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>datetime permet de manipuler les dates et heures.</p>
+            <pre><code>from datetime import datetime, date, timedelta
+from zoneinfo import ZoneInfo
+
+now = datetime.now(ZoneInfo(&quot;Europe/Paris&quot;))
+demain = now + timedelta(days=1)
+
+print(now.strftime(&quot;%d/%m/%Y %H:%M&quot;))
+print(demain.isoformat())
+
+dt = datetime.strptime(&quot;11/05/2026&quot;, &quot;%d/%m/%Y&quot;)
+print(dt)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">bytes</span>
+            <span class="card-title">Bytes</span>
+            <span class="card-brief">encode / decode</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>str représente du texte. bytes représente des données binaires.</p>
+            <pre><code>texte = &quot;Café résumé&quot;
+
+b = texte.encode(&quot;utf-8&quot;)
+print(b)
+
+retour = b.decode(&quot;utf-8&quot;)
+print(retour)
+
+data = b&quot;Hello&quot;
+print(data[0])  # 72</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">struct</span>
+            <span class="card-title">struct</span>
+            <span class="card-brief">Données binaires structurées</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>struct sert à convertir des nombres en format binaire et inversement.</p>
+            <pre><code>import struct
+
+data = struct.pack(&quot;&gt;IHf&quot;, 42, 7, 3.14)
+print(data)
+
+valeurs = struct.unpack(&quot;&gt;IHf&quot;, data)
+print(valeurs)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="functools">
+        <div class="section-title">
+          <h2>Functools &amp; contextlib</h2>
+          <span>INTERMÉDIAIRE</span>
+        </div>
+        <p class="section-desc">Outils avancés pour fonctions et context managers.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">cache</span>
+            <span class="card-title">lru_cache</span>
+            <span class="card-brief">Mémoïsation</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>lru_cache mémorise les résultats pour accélérer les appels répétés.</p>
+            <pre><code>from functools import lru_cache
+
+@lru_cache(maxsize=128)
+def fib(n):
+    if n &lt; 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+print(fib(100))
+print(fib.cache_info())</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">partial</span>
+            <span class="card-title">partial</span>
+            <span class="card-brief">Pré-remplir des arguments</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>partial crée une nouvelle fonction avec certains arguments déjà fixés.</p>
+            <pre><code>from functools import partial
+
+def puissance(base, exp):
+    return base ** exp
+
+carre = partial(puissance, exp=2)
+cube = partial(puissance, exp=3)
+
+print(carre(5))
+print(cube(3))</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">contextmanager</span>
+            <span class="card-title">@contextmanager</span>
+            <span class="card-brief">Avec un générateur</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Le code avant yield prépare, le code après yield nettoie.</p>
+            <pre><code>from contextlib import contextmanager
+import time
+
+@contextmanager
+def timer(label):
+    start = time.perf_counter()
+    try:
+        yield
+    finally:
+        elapsed = time.perf_counter() - start
+        print(f&quot;{label} : {elapsed:.3f}s&quot;)
+
+with timer(&quot;Calcul&quot;):
+    sum(range(1_000_000))</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="threading">
+        <div class="section-title">
+          <h2>Threading &amp; multiprocessing</h2>
+          <span>OUTILS</span>
+        </div>
+        <p class="section-desc">Concurrence et parallélisme.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">thread</span>
+            <span class="card-title">ThreadPoolExecutor</span>
+            <span class="card-brief">Pour I/O</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Dans CPython classique, les threads sont surtout utiles pour l&#x27;I/O. Pour le CPU, on préfère souvent les processus.</p>
+            <pre><code>from concurrent.futures import ThreadPoolExecutor
+import time
+
+def fetch(url):
+    time.sleep(1)
+    return f&quot;Données de {url}&quot;
+
+urls = [&quot;url1&quot;, &quot;url2&quot;, &quot;url3&quot;]
+
+with ThreadPoolExecutor(max_workers=3) as pool:
+    resultats = list(pool.map(fetch, urls))
+
+print(resultats)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">process</span>
+            <span class="card-title">ProcessPoolExecutor</span>
+            <span class="card-brief">Pour CPU</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Le multiprocessing lance de vrais processus séparés.</p>
+            <pre><code>from concurrent.futures import ProcessPoolExecutor
+
+def calcul_lourd(n):
+    return sum(i * i for i in range(n))
+
+if __name__ == &quot;__main__&quot;:
+    with ProcessPoolExecutor() as pool:
+        resultats = list(pool.map(calcul_lourd, [1_000_000] * 4))
+
+    print(resultats)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">lock</span>
+            <span class="card-title">Lock et Queue</span>
+            <span class="card-brief">Synchronisation</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Lock protège une ressource partagée. Queue permet la communication thread-safe.</p>
+            <pre><code>import threading
+from queue import Queue
+
+lock = threading.Lock()
+compteur = 0
+
+def incrementer():
+    global compteur
+    with lock:
+        compteur += 1
+
+q = Queue()
+q.put(&quot;tâche 1&quot;)
+q.put(&quot;tâche 2&quot;)
+
+while not q.empty():
+    print(q.get())
+    q.task_done()</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="tests">
+        <div class="section-title">
+          <h2>Tests avec pytest</h2>
+          <span>OUTILS</span>
+        </div>
+        <p class="section-desc">Tester automatiquement son code.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">pytest</span>
+            <span class="card-title">Test simple</span>
+            <span class="card-brief">assert</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>pytest permet d&#x27;écrire des tests simples avec assert.</p>
+            <pre><code># fichier : test_calcul.py
+
+def addition(a, b):
+    return a + b
+
+def test_addition():
+    assert addition(2, 3) == 5
+    assert addition(-1, 1) == 0
+
+# Terminal :
+# pytest -v</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">raises</span>
+            <span class="card-title">Tester une exception</span>
+            <span class="card-brief">pytest.raises</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>pytest.raises vérifie qu&#x27;une erreur attendue est bien levée.</p>
+            <pre><code>import pytest
+
+def diviser(a, b):
+    return a / b
+
+def test_division_zero():
+    with pytest.raises(ZeroDivisionError):
+        diviser(10, 0)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">fixture</span>
+            <span class="card-title">Fixtures et parametrize</span>
+            <span class="card-brief">Données réutilisables</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Les fixtures préparent des données. parametrize teste plusieurs cas.</p>
+            <pre><code>import pytest
+
+@pytest.fixture
+def user():
+    return {&quot;nom&quot;: &quot;Julien&quot;, &quot;age&quot;: 40}
+
+def test_user(user):
+    assert user[&quot;nom&quot;] == &quot;Julien&quot;
+
+@pytest.mark.parametrize(&quot;a,b,expected&quot;, [
+    (1, 2, 3),
+    (0, 0, 0),
+    (-1, 1, 0),
+])
+def test_add(a, b, expected):
+    assert a + b == expected</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">mock</span>
+            <span class="card-title">Mocking</span>
+            <span class="card-brief">unittest.mock</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Un mock simule une dépendance externe comme une API.</p>
+            <pre><code>from unittest.mock import patch
+
+def get_user_name(user_id):
+    import requests
+    response = requests.get(f&quot;https://api.example.com/users/{user_id}&quot;)
+    return response.json()[&quot;name&quot;]
+
+@patch(&quot;requests.get&quot;)
+def test_get_user_name(mock_get):
+    mock_get.return_value.json.return_value = {&quot;name&quot;: &quot;Julien&quot;}
+
+    assert get_user_name(1) == &quot;Julien&quot;
+    mock_get.assert_called_once()</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="api">
+        <div class="section-title">
+          <h2>HTTP, JSON, CSV &amp; SQLite</h2>
+          <span>PRATIQUE</span>
+        </div>
+        <p class="section-desc">Lire des données, appeler des API et stocker localement.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">requests</span>
+            <span class="card-title">Appeler une API</span>
+            <span class="card-brief">GET, POST</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>requests est une bibliothèque très utilisée pour les requêtes HTTP synchrones.</p>
+            <pre><code>import requests
+
+response = requests.get(
+    &quot;https://api.github.com/users/octocat&quot;,
+    timeout=10
+)
+
+response.raise_for_status()
+data = response.json()
+
+print(data[&quot;login&quot;])</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">json</span>
+            <span class="card-title">JSON</span>
+            <span class="card-brief">loads, dumps</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>JSON est très utilisé pour les APIs et les fichiers de configuration.</p>
+            <pre><code>import json
+
+data = {&quot;nom&quot;: &quot;Julien&quot;, &quot;age&quot;: 40}
+
+texte = json.dumps(data, ensure_ascii=False, indent=2)
+print(texte)
+
+objet = json.loads(texte)
+print(objet[&quot;nom&quot;])</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">csv</span>
+            <span class="card-title">CSV</span>
+            <span class="card-brief">DictReader</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Le module csv permet de lire et écrire des fichiers CSV.</p>
+            <pre><code>import csv
+
+with open(&quot;data.csv&quot;, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as f:
+    reader = csv.DictReader(f)
+
+    for row in reader:
+        print(row[&quot;nom&quot;], row[&quot;age&quot;])
+
+with open(&quot;out.csv&quot;, &quot;w&quot;, newline=&quot;&quot;, encoding=&quot;utf-8&quot;) as f:
+    writer = csv.DictWriter(f, fieldnames=[&quot;nom&quot;, &quot;age&quot;])
+    writer.writeheader()
+    writer.writerow({&quot;nom&quot;: &quot;Julien&quot;, &quot;age&quot;: 40})</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">sqlite</span>
+            <span class="card-title">SQLite</span>
+            <span class="card-brief">Base intégrée</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>sqlite3 est intégré à Python. Parfait pour apprendre les bases de données.</p>
+            <pre><code>import sqlite3
+
+conn = sqlite3.connect(&quot;app.db&quot;)
+cur = conn.cursor()
+
+cur.execute(&#x27;&#x27;&#x27;
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    age INTEGER
+)
+&#x27;&#x27;&#x27;)
+
+cur.execute(&quot;INSERT INTO users (nom, age) VALUES (?, ?)&quot;, (&quot;Julien&quot;, 40))
+conn.commit()
+
+cur.execute(&quot;SELECT nom, age FROM users&quot;)
+print(cur.fetchall())
+
+conn.close()</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="cli-logging">
+        <div class="section-title">
+          <h2>CLI, logging &amp; système</h2>
+          <span>OUTILS</span>
+        </div>
+        <p class="section-desc">Créer des scripts CLI, journaliser et interagir avec le système.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">argparse</span>
+            <span class="card-title">argparse</span>
+            <span class="card-brief">Arguments CLI</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>argparse permet de créer une vraie interface en ligne de commande.</p>
+            <pre><code>import argparse
+
+parser = argparse.ArgumentParser(description=&quot;Mon outil CLI&quot;)
+parser.add_argument(&quot;fichier&quot;, help=&quot;Fichier à traiter&quot;)
+parser.add_argument(&quot;-v&quot;, &quot;--verbose&quot;, action=&quot;store_true&quot;)
+parser.add_argument(&quot;-n&quot;, &quot;--count&quot;, type=int, default=10)
+parser.add_argument(&quot;--format&quot;, choices=[&quot;json&quot;, &quot;csv&quot;])
+
+args = parser.parse_args()
+
+print(args.fichier)
+print(args.verbose)
+print(args.count)
+print(args.format)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">logging</span>
+            <span class="card-title">logging</span>
+            <span class="card-brief">Remplacer print</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>logging permet d&#x27;avoir des niveaux : DEBUG, INFO, WARNING, ERROR, CRITICAL.</p>
+            <pre><code>import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format=&quot;%(asctime)s [%(levelname)s] %(message)s&quot;,
+)
+
+logger = logging.getLogger(__name__)
+
+logger.debug(&quot;Debug&quot;)
+logger.info(&quot;Application démarrée&quot;)
+logger.warning(&quot;Attention&quot;)
+logger.error(&quot;Erreur&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">subprocess</span>
+            <span class="card-title">subprocess</span>
+            <span class="card-brief">Commandes système</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>subprocess.run remplace os.system pour exécuter des commandes.</p>
+            <pre><code>import subprocess
+
+result = subprocess.run(
+    [&quot;python&quot;, &quot;--version&quot;],
+    capture_output=True,
+    text=True,
+    check=True,
+)
+
+print(result.stdout)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">os</span>
+            <span class="card-title">os et sys</span>
+            <span class="card-brief">Système</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>os et sys donnent accès au système et à l&#x27;interpréteur.</p>
+            <pre><code>import os
+import sys
+
+print(os.getcwd())
+print(os.listdir(&quot;.&quot;))
+print(os.environ.get(&quot;HOME&quot;))
+print(os.cpu_count())
+
+print(sys.version)
+print(sys.argv)
+print(sys.path)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="debug-packaging">
+        <div class="section-title">
+          <h2>Debugging, packaging &amp; qualité</h2>
+          <span>OUTILS</span>
+        </div>
+        <p class="section-desc">Déboguer, structurer et nettoyer un projet Python.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">breakpoint</span>
+            <span class="card-title">breakpoint()</span>
+            <span class="card-brief">Debugger intégré</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>breakpoint() lance le debugger Python pdb.</p>
+            <pre><code>def calcul(a, b):
+    resultat = a + b
+    breakpoint()
+    return resultat * 2
+
+print(calcul(2, 3))
+
+# Commandes pdb :
+# n : ligne suivante
+# s : entrer dans une fonction
+# c : continuer
+# p variable : afficher une variable
+# q : quitter</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">traceback</span>
+            <span class="card-title">Traceback</span>
+            <span class="card-brief">Analyser les erreurs</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>traceback permet de capturer ou afficher une trace d&#x27;erreur.</p>
+            <pre><code>import traceback
+
+try:
+    1 / 0
+except ZeroDivisionError:
+    erreur = traceback.format_exc()
+    print(erreur)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">pyproject</span>
+            <span class="card-title">pyproject.toml</span>
+            <span class="card-brief">Configuration moderne</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>pyproject.toml est le standard moderne pour configurer un projet Python.</p>
+            <pre><code>[build-system]
+requires = [&quot;setuptools&gt;=68&quot;]
+build-backend = &quot;setuptools.build_meta&quot;
+
+[project]
+name = &quot;mon-package&quot;
+version = &quot;1.0.0&quot;
+requires-python = &quot;&gt;=3.12&quot;
+dependencies = [
+    &quot;requests&gt;=2.31&quot;,
+]
+
+[project.optional-dependencies]
+dev = [&quot;pytest&quot;, &quot;ruff&quot;, &quot;black&quot;]</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">ruff</span>
+            <span class="card-title">Ruff, Black, Mypy</span>
+            <span class="card-brief">Qualité du code</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Ces outils aident à écrire un code propre et détecter les erreurs plus tôt.</p>
+            <pre><code># Installer les outils
+pip install ruff black mypy pytest
+
+# Formater
+black .
+
+# Vérifier le style
+ruff check .
+
+# Vérifier les types
+mypy .
+
+# Lancer les tests
+pytest -v</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+      <section class="section" id="exercices">
+        <div class="section-title">
+          <h2>Exercices progressifs</h2>
+          <span>PRATIQUE</span>
+        </div>
+        <p class="section-desc">Pour transformer le pense-bête en vrai cours.</p>
+        <div class="grid">
+          
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">exo 1</span>
+            <span class="card-title">Calculatrice simple</span>
+            <span class="card-brief">Variables + conditions</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Objectif : demander deux nombres et une opération, puis afficher le résultat.</p>
+            <pre><code>a = float(input(&quot;Nombre A : &quot;))
+b = float(input(&quot;Nombre B : &quot;))
+op = input(&quot;Opération (+, -, *, /) : &quot;)
+
+if op == &quot;+&quot;:
+    print(a + b)
+elif op == &quot;-&quot;:
+    print(a - b)
+elif op == &quot;*&quot;:
+    print(a * b)
+elif op == &quot;/&quot;:
+    if b == 0:
+        print(&quot;Division par zéro impossible&quot;)
+    else:
+        print(a / b)
+else:
+    print(&quot;Opération inconnue&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">exo 2</span>
+            <span class="card-title">Gestionnaire de dépenses</span>
+            <span class="card-brief">Listes + dictionnaires</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Objectif : stocker des dépenses et calculer le total.</p>
+            <pre><code>depenses = []
+
+while True:
+    nom = input(&quot;Nom de la dépense ou quit : &quot;)
+
+    if nom == &quot;quit&quot;:
+        break
+
+    montant = float(input(&quot;Montant : &quot;))
+    depenses.append({&quot;nom&quot;: nom, &quot;montant&quot;: montant})
+
+total = sum(depense[&quot;montant&quot;] for depense in depenses)
+
+print(&quot;Dépenses :&quot;)
+for depense in depenses:
+    print(f&quot;- {depense[&#x27;nom&#x27;]} : {depense[&#x27;montant&#x27;]} €&quot;)
+
+print(f&quot;Total : {total} €&quot;)</code></pre>
+          </div>
+        </article>
+        
+        <article class="card">
+          <button class="card-head" type="button">
+            <span class="card-tag">exo 3</span>
+            <span class="card-title">Mini JSON</span>
+            <span class="card-brief">Fichier + JSON</span>
+            <span class="chevron">⌄</span>
+          </button>
+          <div class="card-body">
+            <p>Objectif : sauvegarder et relire une liste d&#x27;utilisateurs.</p>
+            <pre><code>import json
+from pathlib import Path
+
+users = [
+    {&quot;nom&quot;: &quot;Julien&quot;, &quot;age&quot;: 40},
+    {&quot;nom&quot;: &quot;Alice&quot;, &quot;age&quot;: 25},
+]
+
+path = Path(&quot;users.json&quot;)
+path.write_text(
+    json.dumps(users, ensure_ascii=False, indent=2),
+    encoding=&quot;utf-8&quot;
+)
+
+contenu = path.read_text(encoding=&quot;utf-8&quot;)
+users_lus = json.loads(contenu)
+
+print(users_lus)</code></pre>
+          </div>
+        </article>
+        
+        </div>
+      </section>
+    
+
+      <section class="section" id="interpreter">
+        <div class="section-title">
+          <h2>Interpréteur Python</h2>
+          <span>PRATIQUE</span>
+        </div>
+        <p class="section-desc">Teste du code Python directement dans le navigateur grâce à Pyodide.</p>
+
+        <div class="interpreter">
+          <div class="terminal-head">
+            <span></span><span></span><span></span>
+            <strong>Python dans le navigateur</strong>
+            <button id="runBtn" type="button" disabled>Chargement...</button>
+            <button id="clearBtn" type="button">Effacer</button>
+          </div>
+          <textarea id="codeInput" spellcheck="false"># Bienvenue dans l'interpréteur Python !
+
+for i in range(5):
+    print(f"{i} au carré = {i ** 2}")</textarea>
+          <div class="output-title">Sortie :</div>
+          <pre id="codeOutput" class="output">En attente de Pyodide...</pre>
+        </div>
+      </section>
+
+      <footer>
+        <p>© 2026 <strong>JLQDeveloppement</strong> — Cours Python complet en français.</p>
+        <p>Exemples pensés pour Python 3.12+ avec notions compatibles selon les versions.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const themeBtn = document.getElementById("themeBtn");
+
+    function setSidebar(open) {
+      sidebar.classList.toggle("open", open);
+      overlay.classList.toggle("open", open);
+      menuBtn.classList.toggle("active", open);
+      menuBtn.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("sidebar-open", open);
+    }
+
+    menuBtn.addEventListener("click", () => {
+      setSidebar(!sidebar.classList.contains("open"));
+    });
+
+    overlay.addEventListener("click", () => setSidebar(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setSidebar(false);
+      }
+    });
+
+    sidebar.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 1100) {
+          setSidebar(false);
+        }
+      });
+    });
+
+    function setTheme(mode) {
+      const isLight = mode === "light";
+      document.body.classList.toggle("light", isLight);
+      themeBtn.textContent = isLight ? "Mode sombre" : "Mode clair";
+      localStorage.setItem("python-theme", mode);
+    }
+
+    setTheme(localStorage.getItem("python-theme") || "dark");
+
+    themeBtn.addEventListener("click", () => {
+      const next = document.body.classList.contains("light") ? "dark" : "light";
+      setTheme(next);
+    });
+
+    document.querySelectorAll(".card-head").forEach((button) => {
+      button.addEventListener("click", () => {
+        button.closest(".card").classList.toggle("open");
+      });
+    });
+
+    const sections = [...document.querySelectorAll(".section")];
+    const navLinks = [...document.querySelectorAll(".nav a")];
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => link.classList.remove("active"));
+          const active = document.querySelector(`.nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-25% 0px -65% 0px" });
+
+    sections.forEach((section) => observer.observe(section));
+
+    let pyodide = null;
+    const runBtn = document.getElementById("runBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const codeInput = document.getElementById("codeInput");
+    const codeOutput = document.getElementById("codeOutput");
+
+    async function initPyodide() {
+      if (pyodide) return;
+
+      try {
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js";
+        document.head.appendChild(script);
+
+        script.onload = async () => {
+          pyodide = await loadPyodide();
+          runBtn.disabled = false;
+          runBtn.textContent = "▶ Exécuter";
+          codeOutput.textContent = "Python prêt. Clique sur ▶ Exécuter ou Ctrl + Entrée.";
+        };
+
+        script.onerror = () => {
+          codeOutput.textContent = "Impossible de charger Pyodide. Vérifie ta connexion.";
+          runBtn.textContent = "Erreur";
+        };
+      } catch (error) {
+        codeOutput.textContent = "Erreur : " + error.message;
+      }
+    }
+
+    const interpreter = document.getElementById("interpreter");
+    const interpreterObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        initPyodide();
+        interpreterObserver.disconnect();
+      }
+    }, { rootMargin: "320px" });
+
+    interpreterObserver.observe(interpreter);
+
+    runBtn.addEventListener("click", async () => {
+      if (!pyodide) return;
+
+      runBtn.disabled = true;
+      runBtn.textContent = "⏳ Exécution...";
+      codeOutput.textContent = "";
+
+      try {
+        pyodide.runPython(`
+import sys
+import io
+_stdout = io.StringIO()
+_stderr = io.StringIO()
+sys.stdout = _stdout
+sys.stderr = _stderr
+`);
+        await pyodide.runPythonAsync(codeInput.value);
+        const stdout = pyodide.runPython("_stdout.getvalue()");
+        const stderr = pyodide.runPython("_stderr.getvalue()");
+        const output = (stdout + (stderr ? "\n⚠ " + stderr : "")).trim();
+        codeOutput.textContent = output || "(aucune sortie)";
+      } catch (error) {
+        codeOutput.textContent = "❌ " + error.message;
+      } finally {
+        runBtn.disabled = false;
+        runBtn.textContent = "▶ Exécuter";
+      }
+    });
+
+    clearBtn.addEventListener("click", () => {
+      codeInput.value = "";
+      codeOutput.textContent = "";
+      codeInput.focus();
+    });
+
+    codeInput.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+        event.preventDefault();
+        runBtn.click();
+      }
+
+      if (event.key === "Tab") {
+        event.preventDefault();
+        const start = codeInput.selectionStart;
+        const end = codeInput.selectionEnd;
+        codeInput.value = codeInput.value.slice(0, start) + "    " + codeInput.value.slice(end);
+        codeInput.selectionStart = codeInput.selectionEnd = start + 4;
+      }
+    });
+  </script>
+</body>
+</html>

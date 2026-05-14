@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="google-site-verification" content="XStraqfadOw5tRwbxlKImNI8Ecs1Z0iAi0YMFN21qw8" />
+<!-- Balises SEO optimisées -->
+<title>FinTrackPredict | Gestion Financière & Simulations Crédit, Crypto, Trading</title>
+<meta name="description" content="FinTrackPredict vous aide à suivre vos finances, gérer votre budget et simuler vos investissements, crédits, crypto et trading. Gratuit et simple d'utilisation." />
+<meta name="keywords" content="fintrackpredict, gestion budget, suivi finances, simulateur crédit, simulateur trading, crypto, fintech, Julien" />
+<meta name="author" content="Julien" />
+<meta name="robots" content="index, follow" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="FinTrackPredict - Gestion Financière & Simulations" />
+<meta property="og:description" content="Gérez vos finances, suivez votre budget et simulez vos crédits, investissements et trading crypto avec FinTrackPredict." />
+<meta property="og:type" content="website" />
+
+<link rel="icon" href="https://projet-fintech.vercel.app/favicon.ico" type="image/x-icon" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<link rel="manifest" href="/manifest.json?v=3">
+
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.v2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon-180.v2.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<link rel="stylesheet" href="style3.css">
+<meta name="google-adsense-account" content="ca-pub-9292330978047766">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z5N8P71M34"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z5N8P71M34');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9292330978047766"
+     crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <!-- Put this just after your <nav> ... </nav> inside the header -->
+<div class="lang-switch">
+  <button type="button" class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+  <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+</div>
+
+  <div class="bg-animated"></div>
+  
+  <header>
+         <h1>💰 FinTrackPredict</h1>
+            <h2>Outil gratuit proposé par FinTrackPredict</h2>
+        <nav>
+          <a href="crypto.html">📈 Trading Crypto</a>
+          <!--  <a href="convertisseur.html">💱 Convertisseur de Devises</a>-->
+          <a href="credit.html">🏦 Simulateur Crédit</a>
+          <a href="rentabiliteImmobilier.html">🏘️ Rentabilité Immobilier</a>
+          <a href="#about">ℹ️ À Propos</a>
+          <a href="#contact">📞 Contact</a>
+        </nav>
+  </header>
+
+  <main>
+
+
+    <div class="container">
+        <div class="feature-card">
+          <h2  id="purpose-title">🎯 Pourquoi FinTrackPredict existe</h2>
+               <h3>Le problème</h3>
+      <p>
+        Gérer son argent au quotidien est souvent chronophage : tableurs compliqués,
+        applis dispersées, peu de visibilité sur l’avenir (crédit, immobilier, placements, crypto).
+      </p>
+        </div>
+
+        
+        <div class="feature-card">
+          <h3>Notre solution</h3>
+               
+      <p>
+        <strong>FinTrackPredict</strong> centralise l’essentiel au même endroit : suivi du budget,
+        visualisation instantanée des revenus/dépenses, export PDF, et simulateurs pratiques
+        (crédit, immobilier, crypto/trading) pour anticiper avant d’agir.
+      </p>
+        </div>
+
+        <div class="feature-card ">
+           <h3>Pour qui ?</h3>
+           <ul>
+        <li>👨‍🎓 Étudiants & jeunes actifs qui veulent démarrer sur de bonnes bases</li>
+        <li>👨‍👩‍👧 Familles qui souhaitent clarifier dépenses partagées et objectifs</li>
+        <li>💼 Indépendants qui veulent une vue simple de leurs flux</li>
+        <li>📈 Investisseurs débutants curieux d’explorer crédit, immo et crypto</li>
+      </ul>
+        </div>
+
+        <div class="feature-card">
+            <h3>Nos principes</h3>
+            <ul>
+              <li>✅ <strong>Simplicité</strong> : une interface claire, des actions évidentes</li>
+              <li>🔒 <strong>Contrôle des données</strong> : vos opérations sont stockées en local sur votre appareil (localStorage)</li>
+              <li>📱 <strong>Partout</strong> : pensé pour mobile et desktop, utilisable en PWA</li>
+              <li>🆓 <strong>Gratuit</strong> : les fonctionnalités clés sont accessibles sans frais</li>
+      </ul>
+        </div>
+
+        <div class="feature-card">
+          <h3>Comment ça marche ?</h3>
+            <ol>
+        <li>Ajoutez vos opérations (revenus/dépenses) ou importez-les au fil de l’eau</li>
+        <li>Suivez vos totaux et graphiques pour une vue en un coup d’œil</li>
+        <li>Testez des scénarios (crédit, immo, crypto) avant de décider</li>
+      </ol>
+        </div>
+
+
+    </div>
+        
+      <!-- Formulaire et Résumé -->
+      <div class="grid grid-2">
+        <div class="card fade-in">
+          <h2>🎯 Ajouter une Opération</h2>
+          <form id="budget-form" class="form-grid">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" id="description" placeholder="Ex: Salaire, Restaurant..." required />
+            </div>
+            <div class="form-group">
+              <label for="montant">Montant (€)</label>
+              <input type="number" id="montant" placeholder="0.00" step="0.01" required />
+            </div>
+            <div class="form-group">
+              <label for="type">Type d'Opération</label>
+              <select id="type">
+                <option value="revenu">💰 Revenu</option>
+                <option value="depense">💸 Dépense</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="partage">Mode de Partage</label>
+              <select id="partage">
+                <option value="1">🔒 Pas de partage</option>
+                <option value="2">👥 Divisé par 2</option>
+                <option value="3">👨‍👩‍👧 Divisé par 3</option>
+              </select>
+            </div>
+            <button type="submit" class="btn" id="btn">✨ Ajouter l'Opération</button>
+          </form>
+        </div>
+
+        <div class="card fade-in">
+          <h2>📊 Résumé Financier</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value" id="revenu">0 €</div>
+              <div class="stat-label">Revenus</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="depense">0 €</div>
+              <div class="stat-label">Dépenses</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="solde">0 €</div>
+              <div class="stat-label">Solde</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- Liste des opérations -->
+<div class="card fade-in">
+  <h2>📋 Historique des Opérations</h2>
+  <div class="operations-container">
+    <div class="operation-column">
+      <h3>💸 Dépenses</h3>
+      <div id="tabDepense">
+        <ul id="listeDepense">
+          <li class="empty-state">
+            <div class="empty-state-icon">💳</div>
+            <p>Aucune dépense enregistrée</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="operation-column">
+      <h3>💰 Revenus</h3>
+      <div id="tabRevenu">
+        <ul id="listeRevenu">
+          <li class="empty-state">
+            <div class="empty-state-icon">💵</div>
+            <p>Aucun revenu enregistré</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- Graphiques -->
+      <div class="grid grid-2">
+        <div class="chart-container fade-in">
+          <h2>🥧 Répartition des Dépenses</h2>
+          <div class="chart-wrapper">
+            <canvas id="depenseChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-container fade-in">
+          <h2>📈 Vue d'Ensemble</h2>
+          <div class="chart-wrapper">
+            <canvas id="globalChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- About Section -->
+    <div class="container">
+      <section class="about-section" id="about">
+          <h2 class="section-title" style="font-size: 25px;">🚀 À Propos de FinTrackPredict</h2>
+
+
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Notre Mission</h3>
+            <p>
+             FinTrackPredict est votre partenaire de confiance pour une gestion financière 
+              personnelle efficace et moderne. Notre mission est de vous offrir des outils 
+              simples, intuitifs et puissants pour prendre le contrôle total de vos finances.
+            </p>
+            <p>
+              Que vous souhaitiez suivre votre budget quotidien, analyser vos dépenses, 
+              simuler des crédits ou explorer les opportunités d'investissement, notre plateforme 
+              vous accompagne à chaque étape de votre parcours financier.
+            </p>
+            <p>
+              <strong>Rejoignez des milliers d'utilisateurs qui ont déjà transformé leur relation à l'argent !</strong>
+            </p>
+          </div>
+        </div>
+        
+        <div class="features-grid">
+          
+          
+          <div class="feature-item">
+            <div class="feature-icon">📱</div>
+            <h4>Multi-plateforme</h4>
+            <p>Accessible sur tous vos appareils : ordinateur, tablette et smartphone pour un suivi en temps réel</p>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            <h4>Temps Réel</h4>
+            <p>Mise à jour instantanée de vos données avec des analyses et graphiques en direct</p>
+          </div>
+          
+        
+          
+          <div class="feature-item">
+            <div class="feature-icon">🆓</div>
+            <h4>Entièrement Gratuit</h4>
+            <p>Tous nos outils essentiels sont disponibles gratuitement</p>
+          </div>
+          
+          <div class="feature-item">
+            <div class="feature-icon">🎨</div>
+            <h4>Design Moderne</h4>
+            <p>Interface élégante et intuitive conçue pour une expérience utilisateur optimale</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Contact Section -->
+      <section class="contact-section" id="contact">
+        <h2 class="section-title">📞 Nous Contacter</h2>
+        
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Restons en Contact</h3>
+            <p>Une question ? Une suggestion ? Notre équipe est là pour vous accompagner dans votre gestion financière !</p>
+            
+            <div class="contact-item">
+              <div style="font-size: 1.5rem; margin-right: 1rem; background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">📧</div>
+              <div>
+                <h4>Email</h4>
+                <p>trackmyfin.julien@gmail.com</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div style="font-size: 1.5rem; margin-right: 1rem; background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⏰</div>
+              <div>
+                <h4>Horaires</h4>
+                <p>Lun-Ven : --</p>
+              </div>
+            </div>
+            
+            <div class="contact-item">
+              <div style="font-size: 1.5rem; margin-right: 1rem; background: var(--secondary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🚀</div>
+              <div>
+                <h4>Réponse</h4>
+                <p>Sous 24h ouvrées</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="contact-form">
+            <h3>📧 Envoyez-nous un Message</h3>
+                <form id="contactForm">
+  <div class="form-row">
+    <div class="form-group">
+      <label for="contactName">Nom complet *</label>
+      <input type="text" id="contactName" name="from_name" placeholder="Votre nom complet" required>
+    </div>
+    <div class="form-group">
+      <label for="contactEmail">Email *</label>
+      <input type="email" id="contactEmail" name="reply_to" placeholder="votre.email@exemple.com" required>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="contactSubject">Sujet *</label>
+    <select id="contactSubject" name="subject" required>
+      <option value="">Choisissez un sujet</option>
+      <option value="support">🛠️ Support technique</option>
+      <option value="feature">💡 Suggestion de fonctionnalité</option>
+      <option value="bug">🐛 Signaler un bug</option>
+      <option value="partnership">🤝 Partenariat</option>
+      <option value="other">❓ Autre</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="contactMessage">Message *</label>
+    <textarea id="contactMessage" name="message" placeholder="Décrivez votre demande, suggestion ou problème en détail..." required></textarea>
+  </div>
+
+  <!-- 👇 Champs cachés pour Formspree -->
+  <input type="hidden" name="_subject" value="Nouveau message FinTrackPredict">
+  <input type="text" name="_gotcha" style="display:none"> <!-- anti-spam -->
+  <!-- (optionnel) Redirection après envoi -->
+  <!-- <input type="hidden" name="_next" value="https://projet-fintech.vercel.app/merci.html"> -->
+
+  <button type="submit" class="btn-contact">🚀 Envoyer le Message</button>
+  <div id="contactSuccess" class="success-message">
+    ✅ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.
+  </div>
+</form>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+<footer>
+    <div class="footer-links">
+          <a href="mentions-legales.html">Mentions légales</a> 
+          <a href="conditions-utilisation.html">Conditions d'utilisation</a> 
+          <a href="politique-confidentialite.html">Politique de confidentialité</a>
+        </div>
+    <button onclick="resetDonnees()">🧹 Réinitialiser les données</button>
+<button onclick="exportPDF()">📄 Exporter en PDF</button>
+
+  </footer>
+    <!-- 🍪 Bandeau Cookie RGPD -->
+<div id="cookie-banner">
+  Ce site utilise des cookies pour améliorer l'expérience utilisateur. 
+  <button id="accept-cookies">Accepter</button>
+</div>
+
+<script>
+  // Affiche le bandeau si consentement non donné
+  if (!localStorage.getItem('cookiesAccepted')) {
+    document.getElementById('cookie-banner').style.display = 'block';
+  }
+
+  // Enregistre l'acceptation dans localStorage
+  document.getElementById('accept-cookies').addEventListener('click', function () {
+    localStorage.setItem('cookiesAccepted', true);
+    document.getElementById('cookie-banner').style.display = 'none';
+  });
+</script>
+
+
+
+<script>
+  
+
+const totalRevenu = document.getElementById('revenu');
+const totalDepense = document.getElementById('depense');
+const totalSolde = document.getElementById('solde');
+const inputType = document.getElementById('type');
+const inputDescription = document.getElementById('description');
+const inputMontant = document.getElementById('montant');
+const inputPartage = document.getElementById('partage');
+const btn = document.getElementById('btn');
+
+let revenu = 0;
+let depense = 0;
+const labels = [];
+const data = [];
+let graphiqueRevenu = 0;
+let graphiqueDepenses = 0;
+let globalChart;
+const backgroundColors = [];
+let operations = [];
+const pieIds = []; // mapping des dépenses -> secteurs du camembert
+
+function getRandomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgba(${r}, ${g}, ${b}, 0.7)`;
+}
+
+function uuid() {
+  if (crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'id-' + Math.random().toString(36).slice(2) + Date.now();
+}
+
+const chart = new Chart(document.getElementById("depenseChart"), {
+  type: "pie",
+  data: {
+    labels,
+    datasets: [{ label: 'Dépense', data, backgroundColor: backgroundColors }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+globalChart = new Chart(document.getElementById("globalChart"), {
+  type: "bar",
+  data: {
+    labels: ["Dépense", "Revenu"],
+    datasets: [{ label: 'Total Dépense & Revenu', data: [0, 0] }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+function sauvegarder() {
+  localStorage.setItem('operationsClean', JSON.stringify(operations));
+  localStorage.setItem('revenu', revenu);
+  localStorage.setItem('depense', depense);
+}
+
+function creerEmptyState(type) {
+  const li = document.createElement('li');
+  li.className = 'empty-state';
+  li.innerHTML = type === 'depense'
+    ? `<div class="empty-state-icon">💳</div><p>Aucune dépense enregistrée</p>`
+    : `<div class="empty-state-icon">💵</div><p>Aucun revenu enregistré</p>`;
+  return li;
+}
+
+function chargerDonnees() {
+  operations = JSON.parse(localStorage.getItem('operationsClean')) || [];
+
+  // Assure un id interne pour chaque op (utile pour la suppression précise)
+  operations.forEach(op => { if (!op._id) op._id = uuid(); });
+
+  // Réinitialiser les compteurs
+  revenu = 0;
+  depense = 0;
+
+  // Vider les listes pour éviter les doublons
+  const ulDep = document.getElementById("listeDepense");
+  const ulRev = document.getElementById("listeRevenu");
+  ulDep.innerHTML = '';
+  ulRev.innerHTML = '';
+
+  // Réinitialiser les datasets du pie
+  labels.length = 0;
+  data.length = 0;
+  backgroundColors.length = 0;
+  pieIds.length = 0;
+
+  // Recalcule les totaux à partir des opérations stockées
+  if (operations.length === 0) {
+    ulDep.appendChild(creerEmptyState('depense'));
+    ulRev.appendChild(creerEmptyState('revenu'));
+  } else {
+    operations.forEach(op => {
+      if (op.type === 'depense') depense += op.montant;
+      else revenu += op.montant;
+      ajouterOperationDOM(op, false);
+    });
+  }
+
+  totalRevenu.textContent = `${revenu.toFixed(2)} €`;
+  totalDepense.textContent = `${depense.toFixed(2)} €`;
+  totalSolde.textContent = `${(revenu - depense).toFixed(2)} €`;
+
+  mettreAJourGraphiques();
+}
+
+function retirerEmptyStateSiPresent(type) {
+  const ul = type === 'depense' ? document.getElementById('listeDepense') : document.getElementById('listeRevenu');
+  const empty = ul.querySelector('.empty-state');
+  if (empty) empty.remove();
+}
+
+function ajouterOperationDOM(op, compter = true) {
+  // Retirer l'état vide si présent
+  retirerEmptyStateSiPresent(op.type);
+
+  const li = document.createElement('li');
+  li.textContent = `${op.description} : ${op.type === 'depense' ? '-' : '+'}${op.montant.toFixed(2)} €`;
+  const deleteBtn = document.createElement('span');
+  deleteBtn.textContent = '❌';
+  deleteBtn.classList.add('delete-btn');
+  li.appendChild(deleteBtn);
+
+  deleteBtn.addEventListener('click', () => supprimerOperation(op, li));
+
+  if (op.type === 'depense') {
+    document.getElementById("listeDepense").appendChild(li);
+    labels.push(op.description);
+    data.push(op.montant);
+    backgroundColors.push(getRandomColor());
+    pieIds.push(op._id);
+    if (compter) depense += op.montant;
+  } else {
+    document.getElementById("listeRevenu").appendChild(li);
+    if (compter) revenu += op.montant;
+  }
+
+  totalRevenu.textContent = `${revenu.toFixed(2)} €`;
+  totalDepense.textContent = `${depense.toFixed(2)} €`;
+  totalSolde.textContent = `${(revenu - depense).toFixed(2)} €`;
+}
+
+function ajouterEtatVideSiListeVide(type) {
+  const ul = type === 'depense' ? document.getElementById("listeDepense") : document.getElementById("listeRevenu");
+  if (ul.children.length === 0) {
+    ul.appendChild(creerEmptyState(type));
+  }
+}
+
+function supprimerOperation(op, li) {
+  if (op.type === 'depense') {
+    depense -= op.montant;
+    const idx = pieIds.indexOf(op._id);
+    if (idx !== -1) {
+      pieIds.splice(idx, 1);
+      labels.splice(idx, 1);
+      data.splice(idx, 1);
+      backgroundColors.splice(idx, 1);
+    }
+  } else {
+    revenu -= op.montant;
+  }
+
+  // Retire de la collection
+  operations = operations.filter(o => o._id !== op._id);
+
+  // Retire du DOM puis, si vide, remet l'état vide
+  li.remove();
+  ajouterEtatVideSiListeVide(op.type);
+
+  totalRevenu.textContent = `${revenu.toFixed(2)} €`;
+  totalDepense.textContent = `${depense.toFixed(2)} €`;
+  totalSolde.textContent = `${(revenu - depense).toFixed(2)} €`;
+
+  mettreAJourGraphiques();
+  sauvegarder();
+}
+
+function mettreAJourGraphiques() {
+  chart.update();
+  globalChart.data.datasets[0].data = [parseFloat(depense.toFixed(2)), parseFloat(revenu.toFixed(2))];
+  globalChart.update();
+}
+
+// Utiliser submit sur le formulaire (meilleure UX, touche Entrée etc.)
+document.getElementById('budget-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const description = inputDescription.value.trim();
+  const montant = parseFloat(inputMontant.value);
+  const type = inputType.value;
+  const partage = parseInt(inputPartage.value, 10);
+
+  if (!description || isNaN(montant) || montant <= 0 || !partage) {
+    alert("Erreur de saisie");
+    return;
+  }
+
+  const montantFinal = parseFloat((montant / partage).toFixed(2));
+  const operation = { _id: uuid(), description, type, montant: montantFinal };
+
+  operations.push(operation);
+  ajouterOperationDOM(operation);
+  mettreAJourGraphiques();
+  sauvegarder();
+
+  // Reset form
+  e.target.reset();
+  inputPartage.value = '1';
+});
+
+function exportPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFontSize(18);
+  doc.text("FinTrackPredict - Résumé Budget", 14, 20);
+  const date = new Date().toLocaleDateString("fr-FR");
+  doc.setFontSize(10);
+  doc.text(`Date : ${date}`, 160, 20);
+
+  doc.setFontSize(12);
+  doc.text(`Revenus totaux : ${totalRevenu.textContent}`, 14, 30);
+  doc.text(`Dépenses totales : ${totalDepense.textContent}`, 14, 36);
+  doc.text(`Solde : ${totalSolde.textContent}`, 14, 42);
+
+  let y = 54;
+  doc.setFontSize(14);
+  doc.text("Détails des dépenses :", 14, y);
+  y += 6;
+
+  operations.filter(op => op.type === "depense").forEach(op => {
+    doc.text(`- ${op.description} : -${op.montant.toFixed(2)} €`, 16, y);
+    y += 6;
+    if (y > 280) { doc.addPage(); y = 20; }
+  });
+
+  y += 10;
+  doc.text("Détails des revenus :", 14, y);
+  y += 6;
+
+  operations.filter(op => op.type === "revenu").forEach(op => {
+    doc.text(`+ ${op.description} : +${op.montant.toFixed(2)} €`, 16, y);
+    y += 6;
+    if (y > 280) { doc.addPage(); y = 20; }
+  });
+
+  doc.save(`FinTrackPredict-${date}.pdf`);
+}
+
+function resetDonnees() {
+  if (confirm("Voulez-vous vraiment réinitialiser toutes les données ?")) {
+    localStorage.clear();
+    location.reload();
+  }
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then(reg => console.log('✅ Service Worker enregistré', reg))
+    .catch(err => console.error('❌ Erreur SW', err));
+}
+
+// Lancement initial
+totalRevenu.textContent = '0.00 €';
+totalDepense.textContent = '0.00 €';
+totalSolde.textContent = '0.00 €';
+chargerDonnees();
+
+
+</script>
+    <script>
+  document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const contactName = document.getElementById('contactName');
+    const contactEmail = document.getElementById('contactEmail');
+    const contactSubject = document.getElementById('contactSubject');
+    const contactMessage = document.getElementById('contactMessage');
+    const success = document.getElementById('contactSuccess');
+
+    try {
+      // Construire le payload attendu par Formspree
+      const formData = new FormData(form);
+      formData.set('from_name', contactName.value);
+      formData.set('reply_to', contactEmail.value);
+      formData.set('subject', contactSubject.value);
+      formData.set('message', contactMessage.value);
+      // (les hidden _subject / _gotcha sont déjà dans le form)
+
+      const res = await fetch('https://formspree.io/f/mzzvlkpn', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(()=> ({}));
+        console.error('Formspree error:', data);
+        alert('❌ Échec de l’envoi. Réessayez plus tard.');
+        return;
+      }
+
+      if (success) {
+        success.classList.add('show');
+        setTimeout(() => success.classList.remove('show'), 3000);
+      } else {
+        alert('✅ Message envoyé !');
+      }
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      alert('❌ Erreur réseau. Vérifiez votre connexion.');
+    }
+  });
+  
+</script>
+
+<script>
+(function () {
+  function setLang(lang) {
+    localStorage.setItem('lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+    });
+
+    const isFR = lang === 'fr';
+
+    // ----- Header Nav -----
+    const setText = (sel, fr, en) => {
+      const el = document.querySelector(sel);
+      if (el) el.textContent = isFR ? fr : en;
+    };
+    setText('nav a[href="crypto.html"]', '📈 Trading Crypto', '📈 Crypto Trading');
+    setText('nav a[href="convertisseur.html"]', '💱 Convertisseur', '💱 Converter');
+    setText('nav a[href="credit.html"]', '🏦 Simulateur Crédit', '🏦 Loan Simulator');
+    setText('nav a[href="rentabiliteImmobilier.html"]', '🏘️ Rentabilité Immobilier', '🏘️ Real Estate Profitability');
+    setText('nav a[href="#about"]', 'ℹ️ À Propos', 'ℹ️ About');
+    setText('nav a[href="#contact"]', '📞 Contact', '📞 Contact');
+
+    // ----- Add Transaction card -----
+    const addCardTitle = document.querySelector('#budget-form')?.closest('.card')?.querySelector('h2');
+    if (addCardTitle) addCardTitle.textContent = isFR ? '🎯 Ajouter une Opération' : '🎯 Add a Transaction';
+    setText('label[for="description"]', 'Description', 'Description');
+    const descInput = document.getElementById('description');
+    if (descInput) descInput.placeholder = isFR ? 'Ex: Salaire, Restaurant...' : 'e.g., Salary, Restaurant...';
+
+    setText('label[for="montant"]', 'Montant (€)', 'Amount (€)');
+    const amtInput = document.getElementById('montant');
+    if (amtInput) amtInput.placeholder = '0.00';
+
+    setText('label[for="type"]', "Type d'Opération", 'Transaction Type');
+    const optRev = document.querySelector('#type option[value="revenu"]');
+    const optDep = document.querySelector('#type option[value="depense"]');
+    if (optRev) optRev.textContent = isFR ? '💰 Revenu' : '💰 Income';
+    if (optDep) optDep.textContent = isFR ? '💸 Dépense' : '💸 Expense';
+
+    setText('label[for="partage"]', 'Mode de Partage', 'Split Mode');
+    const opt1 = document.querySelector('#partage option[value="1"]');
+    const opt2 = document.querySelector('#partage option[value="2"]');
+    const opt3 = document.querySelector('#partage option[value="3"]');
+    if (opt1) opt1.textContent = isFR ? '🔒 Pas de partage' : '🔒 No split';
+    if (opt2) opt2.textContent = isFR ? '👥 Divisé par 2' : '👥 Split by 2';
+    if (opt3) opt3.textContent = isFR ? '👨‍👩‍👧 Divisé par 3' : '👨‍👩‍👧 Split by 3';
+
+    setText('#btn', "✨ Ajouter l'Opération", '✨ Add Transaction');
+
+    // ----- Financial Summary card -----
+    const summaryCard = document.querySelector('.stats-grid')?.closest('.card');
+    const summaryTitle = summaryCard?.querySelector('h2');
+    if (summaryTitle) summaryTitle.textContent = isFR ? '📊 Résumé Financier' : '📊 Financial Summary';
+    const labels = summaryCard?.querySelectorAll('.stat-label');
+    const statLabels = summaryCard?.querySelectorAll('.stat-label');
+if (statLabels && statLabels.length >= 3) {
+  statLabels[0].textContent = isFR ? 'Revenus' : 'Income';
+  statLabels[1].textContent = isFR ? 'Dépenses' : 'Expenses';
+  statLabels[2].textContent = isFR ? 'Solde' : 'Balance';
+}
+
+
+    // ----- Transactions list -----
+    const opsCard = document.querySelector('.operations-container')?.closest('.card');
+    const opsTitle = opsCard?.querySelector('h2');
+    if (opsTitle) opsTitle.textContent = isFR ? '📋 Historique des Opérations' : '📋 Transaction History';
+
+    setText('.operation-column:first-child h3', '💸 Dépenses', '💸 Expenses');
+    setText('.operation-column:last-child h3', '💰 Revenus', '💰 Income');
+    setText('#listeDepense .empty-state p', 'Aucune dépense enregistrée', 'No expense recorded');
+    setText('#listeRevenu .empty-state p', 'Aucun revenu enregistré', 'No income recorded');
+
+    // ----- Charts -----
+    const depChartTitle = document.querySelector('#depenseChart')?.closest('.chart-container')?.querySelector('h2');
+    if (depChartTitle) depChartTitle.textContent = isFR ? '🥧 Répartition des Dépenses' : '🥧 Expense Breakdown';
+    const globalChartTitle = document.querySelector('#globalChart')?.closest('.chart-container')?.querySelector('h2');
+    if (globalChartTitle) globalChartTitle.textContent = isFR ? "📈 Vue d'Ensemble" : '📈 Overview';
+
+    // ----- About -----
+    const about = document.getElementById('about');
+    if (about) {
+      setText('#about .section-title', '🚀 À Propos de FinTrackPredict', '🚀 About FinTrackPredict');
+      setText('#about .about-text h3', 'Notre Mission', 'Our Mission');
+
+      const aboutPs = about.querySelectorAll('.about-text p');
+      if (aboutPs.length >= 3) {
+        if (isFR) {
+          aboutPs[0].textContent = "FinTrackPredict est votre partenaire de confiance pour une gestion financière personnelle efficace et moderne. Notre mission est de vous offrir des outils simples, intuitifs et puissants pour prendre le contrôle total de vos finances.";
+          aboutPs[1].textContent = "Que vous souhaitiez suivre votre budget quotidien, analyser vos dépenses, simuler des crédits ou explorer les opportunités d'investissement, notre plateforme vous accompagne à chaque étape de votre parcours financier.";
+          aboutPs[2].innerHTML   = "<strong>Rejoignez des milliers d'utilisateurs qui ont déjà transformé leur relation à l'argent !</strong>";
+        } else {
+          aboutPs[0].textContent = "FinTrackPredict is your trusted partner for effective, modern personal financial management. Our mission is to provide simple, intuitive, and powerful tools to help you take full control of your finances.";
+          aboutPs[1].textContent = "Whether you want to track your daily budget, analyze your expenses, simulate loans, or explore investment opportunities, our platform supports you every step of your financial journey.";
+          aboutPs[2].innerHTML   = "<strong>Join thousands of users who have already transformed their relationship with money!</strong>";
+        }
+      }
+
+      const featTitles = about.querySelectorAll('.feature-item h4');
+      const featTexts  = about.querySelectorAll('.feature-item p');
+      if (featTitles.length >= 4 && featTexts.length >= 4) {
+        if (isFR) {
+          featTitles[0].textContent = 'Multi-plateforme';
+          featTitles[1].textContent = 'Temps Réel';
+          featTitles[2].textContent = 'Entièrement Gratuit';
+          featTitles[3].textContent = 'Design Moderne';
+
+          featTexts[0].textContent = 'Accessible sur tous vos appareils : ordinateur, tablette et smartphone pour un suivi en temps réel';
+          featTexts[1].textContent = 'Mise à jour instantanée de vos données avec des analyses et graphiques en direct';
+          featTexts[2].textContent = 'Tous nos outils essentiels sont disponibles gratuitement';
+          featTexts[3].textContent = "Interface élégante et intuitive conçue pour une expérience utilisateur optimale";
+        } else {
+          featTitles[0].textContent = 'Multi-platform';
+          featTitles[1].textContent = 'Real Time';
+          featTitles[2].textContent = 'Completely Free';
+          featTitles[3].textContent = 'Modern Design';
+
+          featTexts[0].textContent = 'Accessible on all your devices—desktop, tablet, and smartphone—for real-time tracking';
+          featTexts[1].textContent = 'Instant updates to your data with live analytics and charts';
+          featTexts[2].textContent = 'All our essential tools are available at no cost';
+          featTexts[3].textContent = 'Elegant, intuitive interface designed for an optimal user experience';
+        }
+      }
+    }
+// ----- Section "Pourquoi FinTrackPredict existe" -----
+(function () {
+  const isFR = (lang === 'fr');
+  const T = (fr, en) => (isFR ? fr : en);
+  const S = (el, fr, en) => { if (el) el.textContent = T(fr, en); };
+
+  // On cible les 5 feature-cards de la première .container
+  const cards = document.querySelectorAll('.container > .feature-card');
+  if (cards.length < 5) return;
+
+  const cardWhy        = cards[0]; // titre + "Le problème"
+  const cardSolution   = cards[1];
+  const cardForWho     = cards[2];
+  const cardPrinciples = cards[3];
+  const cardHow        = cards[4];
+
+  // 1) Titre + problème
+  S(cardWhy.querySelector('#purpose-title'),
+    '🎯 Pourquoi FinTrackPredict existe',
+    '🎯 Why FinTrackPredict exists'
+  );
+  S(cardWhy.querySelector('h3'),
+    'Le problème',
+    'The problem'
+  );
+  const whyP = cardWhy.querySelector('p');
+  if (whyP) {
+    whyP.textContent = T(
+      "Gérer son argent au quotidien est souvent chronophage : tableurs compliqués, applis dispersées, peu de visibilité sur l’avenir (crédit, immobilier, placements, crypto).",
+      "Managing money daily is often time-consuming: messy spreadsheets, scattered apps, and little visibility on what’s ahead (loans, real estate, investments, crypto)."
+    );
+  }
+
+  // 2) Notre solution
+  S(cardSolution.querySelector('h3'),
+    'Notre solution',
+    'Our solution'
+  );
+  const solP = cardSolution.querySelector('p');
+  if (solP) {
+    solP.innerHTML = isFR
+      ? "<strong>FinTrackPredict</strong> centralise l’essentiel au même endroit : suivi du budget, visualisation instantanée des revenus/dépenses, export PDF, et simulateurs pratiques (crédit, immobilier, crypto/trading) pour anticiper avant d’agir."
+      : "<strong>FinTrackPredict</strong> centralizes the essentials in one place: budget tracking, instant income/expense visuals, PDF export, and handy simulators (loans, real estate, crypto/trading) to plan before you act.";
+  }
+
+  // 3) Pour qui ?
+  S(cardForWho.querySelector('h3'),
+    'Pour qui ?',
+    'Who is it for?'
+  );
+  const forUl = cardForWho.querySelector('ul');
+  if (forUl) {
+    forUl.innerHTML = isFR ? `
+      <li>👨‍🎓 Étudiants & jeunes actifs qui veulent démarrer sur de bonnes bases</li>
+      <li>👨‍👩‍👧 Familles qui souhaitent clarifier dépenses partagées et objectifs</li>
+      <li>💼 Indépendants qui veulent une vue simple de leurs flux</li>
+      <li>📈 Investisseurs débutants curieux d’explorer crédit, immo et crypto</li>
+    ` : `
+      <li>👨‍🎓 Students & young professionals who want a solid start</li>
+      <li>👨‍👩‍👧 Families seeking clarity on shared expenses and goals</li>
+      <li>💼 Freelancers needing a simple view of their cash flows</li>
+      <li>📈 Beginner investors curious about loans, real estate, and crypto</li>
+    `;
+  }
+
+  // 4) Nos principes
+  S(cardPrinciples.querySelector('h3'),
+    'Nos principes',
+    'Our principles'
+  );
+  const prinUl = cardPrinciples.querySelector('ul');
+  if (prinUl) {
+    prinUl.innerHTML = isFR ? `
+      <li>✅ <strong>Simplicité</strong> : une interface claire, des actions évidentes</li>
+      <li>🔒 <strong>Contrôle des données</strong> : vos opérations sont stockées en local sur votre appareil (localStorage)</li>
+      <li>📱 <strong>Partout</strong> : pensé pour mobile et desktop, utilisable en PWA</li>
+      <li>🆓 <strong>Gratuit</strong> : les fonctionnalités clés sont accessibles sans frais</li>
+    ` : `
+      <li>✅ <strong>Simplicity</strong>: a clear interface and obvious actions</li>
+      <li>🔒 <strong>Data control</strong>: your entries are stored locally on your device (localStorage)</li>
+      <li>📱 <strong>Everywhere</strong>: designed for mobile and desktop, PWA-friendly</li>
+      <li>🆓 <strong>Free</strong>: key features are available at no cost</li>
+    `;
+  }
+
+  // 5) Comment ça marche ?
+  S(cardHow.querySelector('h3'),
+    'Comment ça marche ?',
+    'How it works'
+  );
+  const howOl = cardHow.querySelector('ol');
+  if (howOl) {
+    howOl.innerHTML = isFR ? `
+      <li>Ajoutez vos opérations (revenus/dépenses) ou importez-les au fil de l’eau</li>
+      <li>Suivez vos totaux et graphiques pour une vue en un coup d’œil</li>
+      <li>Testez des scénarios (crédit, immo, crypto) avant de décider</li>
+    ` : `
+      <li>Add your transactions (income/expenses) or import them as you go</li>
+      <li>Track totals and charts for an at-a-glance overview</li>
+      <li>Test scenarios (loans, real estate, crypto) before you decide</li>
+    `;
+  }
+})();
+
+    // ----- Contact -----
+    const contact = document.getElementById('contact');
+    if (contact) {
+      setText('#contact .section-title', '📞 Nous Contacter', '📞 Contact Us');
+      setText('#contact .contact-info h3', 'Restons en Contact', 'Stay in Touch');
+      const introP = contact.querySelector('.contact-info p');
+      if (introP) introP.textContent = isFR
+        ? "Une question ? Une suggestion ? Notre équipe est là pour vous accompagner dans votre gestion financière !"
+        : "Have a question or suggestion? Our team is here to support you in managing your finances!";
+
+      const infoH4 = contact.querySelectorAll('.contact-item h4');
+      const infoP  = contact.querySelectorAll('.contact-item div + div p');
+      if (infoH4.length >= 3 && infoP.length >= 3) {
+        infoH4[0].textContent = isFR ? 'Email' : 'Email';
+        infoP[0].textContent  = 'trackmyfin.julien@gmail.com';
+
+        infoH4[1].textContent = isFR ? 'Horaires' : 'Hours';
+        infoP[1].textContent  = isFR ? 'Lun-Ven : --' : 'Mon–Fri: --';
+
+        infoH4[2].textContent = isFR ? 'Réponse' : 'Response';
+        infoP[2].textContent  = isFR ? 'Sous 24h ouvrées' : 'Within 24 business hours';
+      }
+
+      setText('#contact .contact-form h3', '📧 Envoyez-nous un Message', '📧 Send Us a Message');
+
+      setText('label[for="contactName"]', 'Nom complet *', 'Full name *');
+      const nameInput = document.getElementById('contactName');
+      if (nameInput) nameInput.placeholder = isFR ? 'Votre nom complet' : 'Your full name';
+
+      setText('label[for="contactEmail"]', 'Email *', 'Email *');
+      const emailInput = document.getElementById('contactEmail');
+      if (emailInput) emailInput.placeholder = isFR ? 'votre.email@exemple.com' : 'your.email@example.com';
+
+      setText('label[for="contactSubject"]', 'Sujet *', 'Subject *');
+      const subjSelect = document.getElementById('contactSubject');
+      if (subjSelect) {
+        const opts = subjSelect.querySelectorAll('option');
+        if (opts.length >= 6) {
+          opts[0].textContent = isFR ? 'Choisissez un sujet' : 'Choose a subject';
+          opts[1].textContent = isFR ? '🛠️ Support technique' : '🛠️ Technical support';
+          opts[2].textContent = isFR ? '💡 Suggestion de fonctionnalité' : '💡 Feature suggestion';
+          opts[3].textContent = isFR ? '🐛 Signaler un bug' : '🐛 Report a bug';
+          opts[4].textContent = isFR ? '🤝 Partenariat' : '🤝 Partnership';
+          opts[5].textContent = isFR ? '❓ Autre' : '❓ Other';
+        }
+      }
+
+      setText('label[for="contactMessage"]', 'Message *', 'Message *');
+      const msgArea = document.getElementById('contactMessage');
+      if (msgArea) msgArea.placeholder = isFR
+        ? 'Décrivez votre demande, suggestion ou problème en détail...'
+        : 'Describe your request, suggestion, or issue in detail...';
+
+      const hiddenSubj = document.querySelector('input[name="_subject"]');
+      if (hiddenSubj) hiddenSubj.value = isFR ? 'Nouveau message FinTrackPredict' : 'New message FinTrackPredict';
+
+      setText('.btn-contact', '🚀 Envoyer le Message', '🚀 Send Message');
+      setText('#contactSuccess', '✅ Message envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.',
+                              '✅ Message sent successfully! We will get back to you as soon as possible.');
+    }
+
+    // ----- Footer -----
+    const copyP = document.querySelector('footer .footer-content p');
+    if (copyP) copyP.textContent = isFR ? '© 2025 FinTrackPredict - Créé par Julien' : '© 2025 FinTrackPredict - Created by Julien';
+    setText('button[onclick="resetDonnees()"]', '🧹 Réinitialiser', '🧹 Reset');
+    setText('button[onclick="exportPDF()"]', '📄 Exporter PDF', '📄 Export PDF');
+
+    setText('footer .footer-links a[href="mentions-legales.html"]', 'Mentions légales', 'Legal notice');
+    setText('footer .footer-links a[href="conditions-utilisation.html"]', "Conditions d'utilisation", 'Terms of use');
+    setText('footer .footer-links a[href="politique-confidentialite.html"]', 'Politique de confidentialité', 'Privacy policy');
+
+    // ----- Cookie banner (change only text node + button label, keep listener intact) -----
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+    if (cookieBanner && acceptBtn) {
+      const textFR = "Ce site utilise des cookies pour améliorer l'expérience utilisateur. ";
+      const textEN = "This site uses cookies to improve the user experience. ";
+      // Keep first child text node as banner text
+      if (cookieBanner.firstChild && cookieBanner.firstChild.nodeType === Node.TEXT_NODE) {
+        cookieBanner.firstChild.nodeValue = isFR ? textFR : textEN;
+      }
+      acceptBtn.textContent = isFR ? 'Accepter' : 'Accept';
+    }
+
+    // Optional: page title language
+    document.title = isFR
+      ? 'FinTrackPredict | Gestion Financière & Simulations Crédit, Crypto, Trading'
+      : 'FinTrackPredict | Financial Management & Credit, Crypto, Trading Simulations';
+  }
+
+  // Listeners for buttons
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.dataset.lang));
+    });
+    const saved = localStorage.getItem('lang') || (document.documentElement.lang || 'en');
+    setLang(saved);
+  });
+})();
+</script>
+
+
+</body>
+</html>
