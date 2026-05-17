@@ -1346,7 +1346,9 @@
     padding: 14px;
     align-items: flex-start;
   }
-
+h1 {
+  text-align: center;
+}
   .contact-content {
     max-height: 95vh;
     border-radius: 18px;
